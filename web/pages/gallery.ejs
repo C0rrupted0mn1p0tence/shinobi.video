@@ -1,0 +1,51 @@
+<% config.Title='Why'; %>
+<% include blocks/header.ejs %>
+<header id="first">
+    <div class="_shade">
+    <div class="header-content">
+        <div class="inner">
+            <a href="#learn" class="page-scroll"><img src="https://raw.githubusercontent.com/moeiscool/Shinobi/master/web/libs/img/demo5.jpg" style="max-width:100%;border-radius:10px;box-shadow:0 0 15px #333"></a>
+        </div>
+        </div>
+    </div>
+</header>
+<% include blocks/adstrip.ejs %>
+<section id="learn" class="bg-primary">
+    <div class="container">
+        <div class="flex-table">
+        <% [
+                {"name":"Live Stream","type":"frame","src":"//demo.shinobi.video/CT1TvlAdsWqnd02KsMehuEJMvi94AY/embed/2Df5hBE/2041039/jquery|fullscreen|hud","description":"Happening Now"},
+                {"name":"Dashboard v1","type":"image","src":"/libs/assets/demo/1.gif","description":"From November 2016"},
+                {"name":"Dashboard v2","type":"image","src":"/libs/assets/demo/1.jpg","description":"From January 2017"},
+                {"name":"FFprobe Stream Analyzer","type":"image","src":"/libs/assets/demo/2.jpg","description":"From February 2017"},
+                {"name":"Shinobi in the Beginning","type":"ytvideo","yid":"Z2hr5E8w8Q8","description":"From November 2016"},
+                {"name":"Shinobi is Easy","type":"ytvideo","yid":"ZnKr1LwNR88","description":""},
+                {"name":"Who is Shinobi for?","type":"ytvideo","yid":"1s0PnFWO6hE","description":""},
+                {"name":"Shinobi is Smooth","type":"ytvideo","yid":"CZcBrOEgv2M","description":""},
+                {"name":"Installing Shinobi on Kitematic","type":"ytvideo","yid":"k8sWHRWiaCM","description":""},
+                {"name":"Shinobi on an Intel Atom 1.2Ghz","type":"ytvideo","yid":"G-Zpxu2aEHg","description":""},
+            ].forEach(function(v){ %>
+            <div class="flex-block col-md-6">
+                <div class="flex-unit text-center">
+                    <%-v.description%><div class="description"><%-v.description%></div><% } %>
+                    <h2 class="margin-top-0 text-primary title"><%-v.name%></h2>
+                    <hr class="primary">
+                    <% switch(v.type){
+                        case'ytvideo': %>
+                        <iframe class="flex-unit-element" src="https://www.youtube.com/embed/<%-v.yid%>" frameborder="0" allowfullscreen></iframe>
+                    <%  break;
+                        case'image': %>
+                        <img class="flex-unit-element imgPop" src="<%-v.src%>">
+                    <%  break;
+                        case'frame': %>
+                        <iframe class="flex-unit-element" src="<%-v.src%>"></iframe>
+                    <%  break;
+                       } %>
+                </div>
+            </div>
+        <% }) %>
+        </div>
+     </div>
+  </section>
+<% include blocks/getstarted.ejs %>
+<% include blocks/footer.ejs %>
