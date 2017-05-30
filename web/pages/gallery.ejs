@@ -9,12 +9,14 @@
         </div>
     </div>
 </header>
-<% include blocks/adstrip.ejs %>
-<section id="learn" class="bg-primary">
-    <div class="container">
+<section id="learn">
+    <div class="container doc-content text-center">
+        <h2 class="margin-top-0 text-primary title">Gallery</h2>
+        <hr class="primary">
+        <div style="display:inline-block;width:400px;margin-bottom:20px"><% include ../docs/blocks/search.ejs %></div>
         <div class="flex-table">
         <% [
-                {"name":"Live Stream","type":"frame","src":"//demo.shinobi.video/CT1TvlAdsWqnd02KsMehuEJMvi94AY/embed/2Df5hBE/2041039/jquery|fullscreen|hud","description":"Happening Now"},
+                {"name":"Live Stream","type":"frame","src":"//demo.shinobi.video/CT1TvlAdsWqnd02KsMehuEJMvi94AY/embed/2Df5hBE/2041039/jquery|fullscreen|hud","description":"Happening Now at 3fps over Websocket. Each frame is Base64 encoded then drawn to a canvas element."},
                 {"name":"Dashboard v1","type":"image","src":"/libs/assets/demo/1.gif","description":"From November 2016"},
                 {"name":"Dashboard v2","type":"image","src":"/libs/assets/demo/1.jpg","description":"From January 2017"},
                 {"name":"FFprobe Stream Analyzer","type":"image","src":"/libs/assets/demo/2.jpg","description":"From February 2017"},
@@ -22,25 +24,29 @@
                 {"name":"Shinobi is Easy","type":"ytvideo","yid":"ZnKr1LwNR88","description":""},
                 {"name":"Who is Shinobi for?","type":"ytvideo","yid":"1s0PnFWO6hE","description":""},
                 {"name":"Shinobi is Smooth","type":"ytvideo","yid":"CZcBrOEgv2M","description":""},
+                {"name":"Shinobi on an Intel Atom 1.2Ghz","type":"ytvideo","yid":"G-Zpxu2aEHg","description":"Aspire One D255E"},
                 {"name":"Installing Shinobi on Kitematic","type":"ytvideo","yid":"k8sWHRWiaCM","description":""},
-                {"name":"Shinobi on an Intel Atom 1.2Ghz","type":"ytvideo","yid":"G-Zpxu2aEHg","description":""},
+                {"name":"Get Control URL for Foscam","type":"ytvideo","yid":"zjs-8LZDc1I","description":""},
+                {"name":"Add a Streamer Camera","type":"ytvideo","yid":"7pO1l87iNMY","description":""},
             ].forEach(function(v){ %>
-            <div class="flex-block col-md-6">
-                <div class="flex-unit text-center">
-                    <%-v.description%><div class="description"><%-v.description%></div><% } %>
-                    <h2 class="margin-top-0 text-primary title"><%-v.name%></h2>
+            <div class="flex-block col-md-6 section-block">
+                <div class="flex-unit">
+                    <h4 class="margin-top-0 text-primary title"><%-v.name%></h4>
                     <hr class="primary">
-                    <% switch(v.type){
-                        case'ytvideo': %>
-                        <iframe class="flex-unit-element" src="https://www.youtube.com/embed/<%-v.yid%>" frameborder="0" allowfullscreen></iframe>
-                    <%  break;
-                        case'image': %>
-                        <img class="flex-unit-element imgPop" src="<%-v.src%>">
-                    <%  break;
-                        case'frame': %>
-                        <iframe class="flex-unit-element" src="<%-v.src%>"></iframe>
-                    <%  break;
-                       } %>
+                    <div class="flex-container">
+                        <%if(v.description){%><div class="description"><%-v.description%></div><% } %>
+                        <% switch(v.type){
+                            case'ytvideo': %>
+                            <iframe class="flex-unit-element" src="https://www.youtube.com/embed/<%-v.yid%>" frameborder="0" allowfullscreen></iframe>
+                        <%  break;
+                            case'image': %>
+                            <img class="flex-unit-element imgPop" src="<%-v.src%>">
+                        <%  break;
+                            case'frame': %>
+                            <iframe class="flex-unit-element" src="<%-v.src%>"></iframe>
+                        <%  break;
+                           } %>
+                    </div>
                 </div>
             </div>
         <% }) %>
