@@ -136,7 +136,15 @@
             },
             {
                 "text":"You can use it in an iframe like this",
-                "code":"&lt;iframe src=\"http://xxx.xxx.xxx.xxx/[API KEY]/embed/[GROUP KEY]/[MONITOR ID]/jquery|fullscreen\"&gt;&lt;/iframe"
+                "code":"&lt;iframe src=\"http://xxx.xxx.xxx.xxx/[API KEY]/embed/[GROUP KEY]/[MONITOR ID]/jquery|fullscreen\"&gt;&lt;/iframe&gt;"
+            },
+            {
+                "text":"other available options are as follows. You must separate them with <code>|</code>",
+                "list":[
+                    "<b>jquery :</b> this addon adds jquery to the embed page. By default jquery is not loaded in case you have already loaded it where you are embedding the stream.",
+                    "<b>fullscreen :</b> This adds CSS rules to fullscreen the stream element. This is good when embedding with an iframe.",
+                    "<b>gui :</b> Extra CSS rules are added to display other information the Shinobi engine might have to provide."
+                ]
             },
             {
                 "text":"You <strong>cannot</strong> use the URL like this",

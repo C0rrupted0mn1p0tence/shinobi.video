@@ -6,7 +6,7 @@
     .super-table tr:last-child td:last-child{border-bottom-right-radius:5px;}
     .super-table tr td{text-transform:uppercase;letter-spacing: .2em;font-size: 12px;}
     .super-table tr td:not(:first-child) i{font-size:15pt}
-    .super-table tr td{border-bottom: 1px solid #444;width: 140px;text-align: center;}
+    .super-table tr td{border-bottom: 1px solid #ababab;width: 140px;text-align: center;}
     .super-table tr td:first-child span{margin-right:15px;cursor:pointer}
     .super-table tr td:first-child{text-align:left;font-weight: bold;
     font-style: normal;font-size:0.8em;
@@ -18,11 +18,11 @@
     text-align: left;
 }
     .super-table tfoot tr:last-child td{border:0}
-    .super-table tbody tr:hover td{background:#444}
+    .super-table tbody tr:hover td{background:#eaeaea}
 
-    .red-center.super-table tr td:nth-child(2){border-radius:0!important;border-bottom: 1px solid #343434;background:#a94442!important;color:#fff}
+    .red-center.super-table tr td:nth-child(2){border-radius:0!important;border-bottom: 1px solid #3d75d2;background:#4285f4!important;color:#fff}
     .red-center.super-table tr td:nth-child(2) .fa,.red-center.super-table tr td:nth-child(2) a{color:#fff;}
-    .red-center.super-table tbody tr:hover td:nth-child(2){background:#803130!important;color:#fff}
+    .red-center.super-table tbody tr:hover td:nth-child(2){background:#114daf!important;color:#fff}
     .red-center.super-table tr td:nth-child(2) .btn{border-color:#fff!important;color:#fff!important}
     .red-center.super-table thead tr td:nth-child(2){border-radius:4px 4px 0 0!important}
     .red-center.super-table tfoot tr td:nth-child(2){border-radius:0 0 4px 4px!important}

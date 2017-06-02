@@ -1,10 +1,11 @@
 .grid-1-5 ._shade,.grid-1-5 ._content{position:absolute;left:0;top:0;height:100%;width:100%;padding: 1.25em;}
 .grid-1-5 ._shade{background:rgba(0,0,0,0.7);}
 .grid-1-5 {
+    color:#fff;
  display:inline-block;
   vertical-align: top;
   float: none!important;
-  border: 2px solid #c49a6c;
+  border: 2px solid #4285f4;
   min-width: 200px;
   min-height: 400px;
   position: relative;
@@ -117,7 +118,7 @@
 }
 
 .grid-1-5 .button {
-  background-color: #c49a6c;
+  background-color: #4285f4;
   border-radius: 20px;
   color: #fff;
   font-size: 1em;
