@@ -28,3 +28,16 @@
     .red-center.super-table tfoot tr td:nth-child(2){border-radius:0 0 4px 4px!important}
     .red-center.super-table tfoot tr td:nth-child(2) .circ-img{border-color:#15a515;}
     .super-table .description{letter-spacing:initial;text-transform:none;font-weight:normal}
+
+.body-dark .red-center.super-table tr td:nth-child(2){
+    border-bottom: 1px solid #343434;
+    background: #a94442!important;
+    color: #fff;
+}
+.body-dark .super-table tbody tr:hover td {
+    background: #444;
+}
+.body-dark .red-center.super-table tbody tr:hover td:nth-child(2) {
+    background: #803130!important;
+    color: #fff;
+}
