@@ -22,7 +22,7 @@
 </p><pre lang=""><code>{
   "port": 8080,
   "utcOffset":"-0800",
-  "DropboxAppKey":"XXXXXXXXXXXX",
+  "DropboxAppKey": "mwgh09b16myew4s",
   "db": {
     "host": "127.0.0.1",
     "user": "majesticflame",
@@ -36,7 +36,13 @@
         "user": "your_email@gmail.com",
         "pass": "your_password_or_app_specific_password"
         }
-    }
+  },
+  "cron":{
+      "key":"change_this_to_something_very_random__just_anything_other_than_this"
+  },
+  "pluginKeys":{
+      "Motion":"change_this_to_something_very_random____make_sure_to_match__/plugins/motion/conf.json"
+  }
 }</code></pre>
 
 <h3 class="block-title question">Available Options for conf.json</h3>
@@ -77,6 +83,12 @@
 <td>no</td>
 <td>string</td>
 <td>default is <b>videos</b> in the Shinobi directory. Leave it undefined or <b>null</b> to use default.</td>
+</tr>
+  <tr>
+<td>windowsTempDir</td>
+<td>no</td>
+<td>string</td>
+<td>default is <b>C:/Windows/Temp</b>. If your system is not located on the C: drive then you must add this option in your conf.json file.</td>
 </tr>
   <tr>
 <td>DropboxAppKey</td>
