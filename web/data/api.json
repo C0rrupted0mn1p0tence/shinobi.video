@@ -112,6 +112,21 @@
         ]
     },
     {
+        "description":"Add, Edit or Delete a Monitor",
+        "blocks":[
+            {
+                "text":"Configuration of monitors remotely.",
+                "code":"http://xxx.xxx.xxx.xxx/[API KEY]/configureMonitor/[GROUP KEY]/[MONITOR ID]/[ACTION*]?data={\"mid\":..}",
+                "list":[
+                    "<code>[ACTION*]</code> can be set to <code>delete</code> or not used entirely, There are no other options.",
+                    "It is not necessary to put the <code>data</code> JSON if you are deleting.",
+                    "The act of adding a monitor with an already existing ID will edit the existing monitor.",
+                    "For an example of what to put for the <code>data</code> object check out this <a href='https://s3.amazonaws.com/cloudcamio/Shinobi_awFST99MGn_config.json'>Sample JSON</a>."
+                ]
+            }
+        ]
+    },
+    {
         "description":"Embedding Streams",
         "blocks":[
             {
