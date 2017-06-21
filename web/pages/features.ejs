@@ -24,8 +24,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="margin-top-0 text-primary">Compared to the Leading Alternative</h2>
-                <p>Rediscover CCTV and NVR with Shinobi</p>
+                <h2 class="margin-top-0 text-primary" title="ZoneMinder vs Shinobi">Features Comparison</h2>
+                <p>"We live in a world where shinobi are younger than you... yet more powerful than me."</p>
                 <hr class="primary">
             </div>
         </div>
@@ -34,7 +34,7 @@
               <tr>
                   <td>&nbsp;</td>
                   <td>Shinobi</td>
-                  <td>Alternative</td>
+                  <td>ZoneMinder</td>
               </tr>
           </thead>
           <tbody>
@@ -130,6 +130,7 @@
                       description:'Record frames that are pushed to the server over websocket. This can be useful for mobile devices setup as dashcams or mobile cloud recording units.',
                   },
                   {
+                      important:1,
                       label:'Stream Limit',
                       feature:'None with Base64 and JPEG Mode',
                       compare1:'~6, Depends on method used to view',
@@ -170,6 +171,12 @@
                       feature:1,
                       compare1:1,
                       description:'Groupings for monitors to quickly display certain streams and data.',
+                  },
+                  {
+                      label:'2-Factor Authentication',
+                      feature:1,
+                      compare1:0,
+                      description:'After logging in a code is sent to your email and you will be presented with a screen to validate that code before you can access your account.',
                   },
                   {
                       label:'RESTful API Access',
@@ -261,13 +268,23 @@
                       compare1:'MySQL / MariaDB',
                       description:'Where information about the users, filesystem, and cameras are stored.',
                   },
+                  {
+                      important:1,
+                      label:'Telemetry',
+                      feature:'<b>It is against our principles to use telemetry in private installations</b>',
+                      compare1:1,
+                      description:'This data will be used to determine things like who and where people are, how big their systems are, the underlying hardware and operating system, etc.',
+                  },
               ].forEach(function(v,n){
                   ['feature','compare1'].forEach(function(b){
                       if(v[b]===1){v[b]='<i class="fa fa-check text-success"></i>'}
                       if(v[b]===0){v[b]='<i class="fa fa-times text-danger"></i>'}
                   })
+                  if(v.important===1){
+                      v.label='<i class="fa fa-exclamation-triangle" title="Important"></i> '+v.label
+                  }
                   %>
-              <tr title="<%-v.description%>">
+              <tr>
                   <td><%-v.label%><div class="description"><small><%-v.description%></small></div></td>
                   <td><%-v.feature%></td>
                   <td><%-v.compare1%></td>

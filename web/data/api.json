@@ -112,6 +112,23 @@
         ]
     },
     {
+        "description":"Modifying a Video or Deleting it",
+        "blocks":[
+            {
+                "text":"Delete a video",
+                "code":"http://xxx.xxx.xxx.xxx/[API KEY]/videos/[GROUP KEY]/[MONITOR ID]/[FILENAME]/delete"
+            },
+            {
+                "text":"Mark as Unread",
+                "code":"http://xxx.xxx.xxx.xxx/[API KEY]/videos/[GROUP KEY]/[MONITOR ID]/[FILENAME]/status/1"
+            },
+            {
+                "text":"Mark as Read",
+                "code":"http://xxx.xxx.xxx.xxx/[API KEY]/videos/[GROUP KEY]/[MONITOR ID]/[FILENAME]/status/2"
+            }
+        ]
+    },
+    {
         "description":"Add, Edit or Delete a Monitor",
         "blocks":[
             {

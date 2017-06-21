@@ -1,51 +1,33 @@
 <div id="setup_ubuntu_hard"  class="section-block">
 <h3 class="block-title question">Ubuntu 16.04 : The Harder Way</h3>
 <p id="static-ffmpeg"><b>Dont have FFMPEG installed?</b></p>
-<ul>
-    <li><a href="https://s3.amazonaws.com/cloudcamio/ffmpeg-release-32bit-static.tar.xz">Version 3.3 - 32bit</a> - <code>https://s3.amazonaws.com/cloudcamio/ffmpeg-release-32bit-static.tar.xz</code></li>
-    <li><a href="https://s3.amazonaws.com/cloudcamio/ffmpeg-release-64bit-static.tar.xz">Version 3.3 - 64bit</a> - <code>https://s3.amazonaws.com/cloudcamio/ffmpeg-release-64bit-static.tar.xz</code></li>
-    <li><a href="https://s3.amazonaws.com/cloudcamio/ffmpeg-release-armel-32bit-static.tar.xz">Version 3.3 - ARMel</a> - <code>https://s3.amazonaws.com/cloudcamio/ffmpeg-release-armel-32bit-static.tar.xz</code></li>
-    <li><a href="https://s3.amazonaws.com/cloudcamio/ffmpeg-release-armhf-32bit-static.tar.xz">Version 3.3 - ARMhf</a> - <code>https://s3.amazonaws.com/cloudcamio/ffmpeg-release-armhf-32bit-static.tar.xz</code></li>
-</ul>
     <ol>
 <li>Open <code>Terminal</code>.</li>
 <li>
-<p>Install wget <i>or use curl if you want</i></p>
+<p>Add the ffmpeg 3.x repo if you are not on Ubuntu 17 or above.</p>
 
-<pre><code>apt update
-apt install wget
+<pre><code>sudo add-apt-repository ppa:jonathonf/ffmpeg-3
 </code></pre>
         </li>
 <li>
-<p>Download FFMPEG through terminal. You may replace the URL with any of the ones above.</p>
+<p>Install the libraries.</p>
 
-<pre><code>wget <i>https://s3.amazonaws.com/cloudcamio/ffmpeg-release-64bit-static.tar.xz</i>
-</code></pre>
+<pre><code>sudo apt update && sudo apt install ffmpeg libav-tools x264 x265</code></pre>
         </li>
-<li>
-<p>Uncompress the file you just downloaded.</p>
-
-<pre><code>tar xf <i>ffmpeg-release-64bit-static.tar.xz</i>
-</code></pre>
-        </li>
-<li><p>Then navigate into the directory that you just extracted. Directory name varies based on the version of ffmpeg you download.</p>
-<pre><code>cd <i>ffmpeg-3.3-64bit-static</i>
-mv ./ffmpeg /usr/bin/ffmpeg
-mv ./ffmpeg-10bit /usr/bin/ffmpeg-10bit
-mv ./ffprobe /usr/bin/ffprobe
-mv ./ffserver /usr/bin/ffserver
-</code></pre>
-</li>
-<li><p>Then make them executable</p>
-    <pre><code>chmod +x /usr/bin/ffmpeg
-chmod +x /usr/bin/ffmpeg-10bit
-chmod +x /usr/bin/ffprobe
-chmod +x /usr/bin/ffserver
-</code></pre></li>
         <li><p>Now run ffmpeg once to see that it works.</p>
         <pre><code>ffmpeg</code></pre>
         </li>
 </ol>
+    <p>Can't get FFMPEG 3.x through a repository? Try a static build. Keep in mind this does not work with as many cameras as installing from repo or building yourself.</p>
+    <ul>
+        <li><a href="https://github.com/moeiscool/ffmpegTheEasyWay">How to install a static build of FFMPEG</a> - <code>https://github.com/moeiscool/ffmpegTheEasyWay</code></li>
+        <li><a href="https://s3.amazonaws.com/cloudcamio/ffmpeg-release-32bit-static.tar.xz">Version 3.3 - 32bit</a> - <code>https://s3.amazonaws.com/cloudcamio/ffmpeg-release-32bit-static.tar.xz</code></li>
+        <li><a href="https://s3.amazonaws.com/cloudcamio/ffmpeg-release-64bit-static.tar.xz">Version 3.3 - 64bit</a> - <code>https://s3.amazonaws.com/cloudcamio/ffmpeg-release-64bit-static.tar.xz</code></li>
+        <li><a href="https://s3.amazonaws.com/cloudcamio/ffmpeg-release-armel-32bit-static.tar.xz">Version 3.3 - ARMel</a> - <code>https://s3.amazonaws.com/cloudcamio/ffmpeg-release-armel-32bit-static.tar.xz</code></li>
+        <li><a href="https://s3.amazonaws.com/cloudcamio/ffmpeg-release-armhf-32bit-static.tar.xz">Version 3.3 - ARMhf</a> - <code>https://s3.amazonaws.com/cloudcamio/ffmpeg-release-armhf-32bit-static.tar.xz</code></li>
+    </ul>
+    <p>If you choose to build yourself you must enabled the following flags for Shinobi to work correctly.</p>
+    <pre><code>--enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev=sndio --disable-outdev=sndio --cc=gcc-5 --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gray --enable-libass --enable-libfreetype --enable-libfribidi --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libopus --enable-librtmp --enable-libsoxr --enable-libspeex --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxvid --enable-libzimg</code></pre>
     <p><b>Dont have Node.js installed?</b></p>
 <ol>
 <li>Open <code>Terminal</code>.</li>
@@ -81,7 +63,7 @@ sudo n stable
 </ul>
 </li>
 </ol>
-<p><b>Dont have MySQL installed?</b></p>
+<p><b>Dont have MySQL / MariaDB installed?</b></p>
 <ol>
 <li>
 <p>Open <code>Terminal</code>. Run :</p>
@@ -89,7 +71,7 @@ sudo n stable
 <pre><code>apt install mariadb-server mariadb-client -y
 </code></pre>
 </li>
-<li><p>Installation of MySQL prompt you to set a password for <code>root</code> user in MySQL on your first install.</p></li>
+<li><p>First installation of the database will prompt you to set a password for <code>root</code> user in the database.</p></li>
 </ol>
 <p><b>Application Install</b></p> 
 <ol>

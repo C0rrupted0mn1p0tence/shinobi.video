@@ -4,6 +4,9 @@ process.on('uncaughtException', function (err) {
 });
 //variables
 var https = require('https');
+var http = require('http');
+var moment = require('moment');
+var exec = require('child_process').exec;
 var express = require('express');
 var fs = require('fs');
 var app = express()
@@ -61,7 +64,7 @@ app.get('/google8b1d9d3a727f1256.html', function(req, res) {
 app.get('/donations.json', function(req, res) {
     req.orders=[];
     req.run=function(x){
-        https.request('https://cloudchat.online/admin/api.php?api_id='+config.hostbill.id+'&api_key='+config.hostbill.key+'&call=getOrders&list=active', function(data) {
+        http.request('http://billing.place/admin/api.php?api_id='+config.hostbill.id+'&api_key='+config.hostbill.key+'&call=getInvoices&list=paid', function(data) {
               data.setEncoding('utf8');
               req.chunks='';
               data.on('data', (chunk) => {
@@ -69,13 +72,28 @@ app.get('/donations.json', function(req, res) {
               });
               data.on('end', () => {
                 try{req.chunks=JSON.parse(req.chunks);}catch(er){}
-                req.orders=req.orders.concat(req.chunks.orders)
-                if(req.chunks.sorter.totalpages>=req.chunks.sorter.sorterpage){
-                    res.send(JSON.stringify(req.orders))
-    //                res.end();
-                }else{
-                    req.run(req.chunks.sorter.sorterpage+1)
-                }
+                req.orders=req.orders.concat(req.chunks.invoices)
+//                if(req.chunks.sorter.totalpages>=req.chunks.sorter.sorterpage){
+                    var x={};
+                    x.total=0;
+                    x.donationMax=600;
+                    x.firstDay = new Date;
+                    x.firstDay = new Date(x.firstDay.getFullYear(), x.firstDay.getMonth(), 1);
+                    x.names=[]
+                    req.orders.forEach(function(v,n){
+                        if(moment(v.date).diff(moment(x.firstDay)) >= 0){
+                            x.total+=parseFloat(v.total);
+                            v.name=v.firstname+' '+v.lastname
+                            if(x.names.indexOf(v.name)===-1){
+                                x.names.push(v.name)
+                            }
+                        }
+                    })
+                    x.percent=x.total/x.donationMax*100
+                    res.send(JSON.stringify(x))
+//                }else{
+//                    req.run(req.chunks.sorter.sorterpage+1)
+//                }
               });
 
         }).on('error', function(e) {
@@ -145,7 +163,7 @@ app.get(['/','/:file'], function(req, res) {
 app.listen(config.port,config.ip,function () {
   console.log('Website Loaded on port '+config.port)
 });
-exec('pm2 flush')
+exec('pm2 flush',{detached:true})
 setTimeout(function(){
-    exec('pm2 flush')
+    exec('pm2 flush',{detached:true})
 },60000*60*2)

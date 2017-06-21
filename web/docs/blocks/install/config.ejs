@@ -65,6 +65,12 @@
 <td>string</td>
 <td>A path leading to a JPEG file. This default image is needed for when the camera cannot provide frames.</td>
 </tr>
+      <tr>
+<td>doSnapshot</td>
+<td>no</td>
+<td>boolean</td>
+<td>By default the snapshot in the top left open its own FFMPEG process for a moment to get a single frame, You can avoid this by turning on <b>JPEG API</b> or setting this option to <code>false</code>.</td>
+</tr>
   <tr>
 <td>updateKey</td>
 <td>no</td>
@@ -75,14 +81,14 @@
 <td>streamDir</td>
 <td>no</td>
 <td>string</td>
-<td>default is <b>/dev/shm/streams</b>. Leave it undefined or <b>null</b> to use default. <b>Be careful in using HLS as Stream Type. This directory should be set as somewhere in RAM</b>
+<td>default is <code>/dev/shm/streams/</code>. Remember to end with <code>/</code>. Leave it undefined or <b>null</b> to use default. <b>Be careful in using HLS as Stream Type. This directory should be set as somewhere in RAM</b>
 </td>
 </tr>
   <tr>
 <td>videosDir</td>
 <td>no</td>
 <td>string</td>
-<td>default is <b>videos</b> in the Shinobi directory. Leave it undefined or <b>null</b> to use default.</td>
+      <td>default is <code>videos/</code> in the Shinobi directory. Remember to end with <code>/</code>. Leave it undefined or <b>null</b> to use default.</td>
 </tr>
   <tr>
 <td>windowsTempDir</td>

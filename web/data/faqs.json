@@ -6,7 +6,7 @@
         },
         {
             "Q": "How do I update?",
-            "A": "Please have a look a the <a href=\"//shinobi.video/docs/start#installation-section\">Install</a> page."
+            "A": "Please have a look at the <a href=\"//shinobi.video/docs/start#installation-section\">Install</a> page."
         },
         {
             "Q": "Does it record continuously?",
@@ -23,12 +23,24 @@
         {
             "Q": "Where can I make feature requests?",
             "A": "In the <code>#suggestions</code> channel on <a href=\"http://discordapp.com/invite/mdhmvuH/\">Discord</a>. If you are on a paid support package you may open a ticket in the client area. Either method will work, ticket made in the client area ensures priority for requests."
+        },
+        {
+            "Q": "How do I turn on 2-Factor Authentication (2FA)?",
+            "A": "After logging into your account open Settings. You will see the option if your version of Shinobi has the feature and are not logged into a sub account. Mail options must be set in your application configuration (conf.json)."
         }
     ],
     "Technical":[
         {
             "Q": "Can I run this on HTTPS instead of HTTP?",
             "A": "Yes. You can have it going through a proxy or through cloudflare with a domain, quick and painless. Websocket works excellent through cloudflare."
+        },
+        {
+            "Q": "Why are my videos unplayable somtimes??",
+            "A": "<p>This can mean a number of things.</p><ul><li>Your settings are incompatible with the camera stream. Try using <code>WebM</code> as the file format and <code>libvpx</code> for the video encoder with audio off. <i>Turning off timestamps</i> sometimes also helps.</li><li>Your build of FFMPEG does not work correctly with your operating system. You can rebuild manually or reinstall from a repository.</li><li>Your libraries are damaged or out of date.</li></ul>"
+        },
+        {
+            "Q": "Where can i change the videos or temporary streams directory?",
+            "A": "Please have a look at the <a href=\"//shinobi.video/docs/start#config_conf\">Configuration section</a> on the Install page."
         },
         {
             "Q": "Would it work for a raspberry pi streaming RTSP h264 video?",

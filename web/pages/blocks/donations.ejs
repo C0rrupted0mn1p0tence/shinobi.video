@@ -18,20 +18,17 @@
 $(document).ready(function(){
     if(!window.donations==true){
         window.donations=true;
-        $.getJSON('/donations.json',function(d){
-            var x={};
-            x.total=0;
-            x.donationMax=600;
-            x.firstDay = new Date;
-            x.firstDay = new Date(x.firstDay.getFullYear(), x.firstDay.getMonth(), 1);
-            $.each(d,function(n,v){
-                if(moment(v.date_created).diff(moment(x.firstDay)) >= 0){
-                    x.total+=parseFloat(v.total);
-                }
-            })
-            x.percent=x.total/x.donationMax*100
+        $.getJSON('/donations.json',function(x){
             $('.donations .progress-bar').css('width',x.percent+'px').text('$'+x.total)
             $('.donationTag').attr('title','$'+x.total+' of $'+x.donationMax)
+            x.e=$('.donorNames')
+            if(x.names.length>0){
+                $.each(x.names,function(n,v){
+                    x.e.append('<li>'+v+'</li>')
+                })
+            }else{
+                s.html("No donors this month :'(")
+            }
         })
     }
 })
