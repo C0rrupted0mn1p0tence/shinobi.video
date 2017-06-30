@@ -1,0 +1,96 @@
+<% var Title='Object Detection'; %>
+<% include blocks/header.ejs %>
+<body class="body-green body-dark">
+    <div class="page-wrapper">
+        <!-- ******Header****** -->
+        <header id="header" class="header">
+            <div class="container">
+                <% include blocks/branding.ejs %>
+            </div><!--//container-->
+        </header><!--//header-->
+        <div class="doc-wrapper">
+            <div class="container">
+                <div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title"><span aria-hidden="true" class="icon fa fa-plug"></span> <%= Title %></h1>
+                </div><!--//doc-header-->
+                <div class="doc-body">
+                    <div class="doc-content">
+                        <div class="content-inner">
+                            <section id="objectdetect" class="doc-section">
+                                <blockquote>
+                                    <i class="fa fa-exclamation-triangle"></i> &nbsp; <b>WARNING</b> : Object Detection uses a lot of CPU power. The base of Shinobi's detection is done by OpenCV. If you can build OpenCV with CUDA support you will have far greater performance.
+                                </blockquote>
+                                <% pageData.forEach(function(v,n){ %>
+                                    <div class="section-block">
+                                        <h3 class="block-title question"><a id="content-<%- link_id(v.description) %>" href="#content-<%- link_id(v.description) %>" class="text-faded"><i class="fa fa-paperclip"></i></a>  <%- v.description %></h3>
+                                        <% v.blocks.forEach(function(b,m){ %>
+                                            <% var drawListItems = function(b,m){ %>
+                                                <li>
+                                                    <% Object.keys(b).forEach(function(t,y){ %>
+                                                        <% switch(t){
+                                                        case 'text': %>
+                                                            <div><p><%- b[t] %></p></div>
+                                                        <% break;
+                                                        case 'code': %>
+                                                            <pre><code><%- b[t] %></code></pre>
+                                                        <% break;
+                                                        case 'list': %>
+                                                            <ul>
+                                                                <% b[t].forEach(drawListItems) %>
+                                                            </ul>
+                                                        <% break;
+                                                        case 'orderList': %>
+                                                            <ol>
+                                                                <% b[t].forEach(drawListItems) %>
+                                                            </ol>
+                                                        <% break; %>
+                                                        <% } %>
+                                                    <% }) %>
+                                                </li>
+                                            <% } %>
+                                            <% Object.keys(b).forEach(function(t,y){ %>
+                                                <% switch(t){
+                                                case 'text': %>
+                                                    <div><p><%- b[t] %></p></div>
+                                                <% break;
+                                                case 'code': %>
+                                                    <pre><code><%- b[t] %></code></pre>
+                                                <% break;
+                                                case 'list': %>
+                                                    <ul>
+                                                        <% b[t].forEach(drawListItems) %>
+                                                    </ul>
+                                                <% break;
+                                                case 'orderList': %>
+                                                    <ol>
+                                                        <% b[t].forEach(drawListItems) %>
+                                                    </ol>
+                                                <% break; %>
+                                                <% } %>
+                                            <% }) %>
+                                        <%  }) %>
+                                    </div>
+                                <%  }) %>
+                            </section><!--//doc-section-->
+<iframe data-aa='495587' src='//ad.a-ads.com/495587?size=728x90' scrolling='no' style='width:728px; height:90px; border:0px; padding:0;overflow:hidden' allowtransparency='true'></iframe>
+
+                        </div><!--//content-inner-->
+                    </div><!--//doc-content-->
+                    <div class="doc-sidebar">
+                        <nav id="doc-nav">
+                            <ul id="doc-menu" class="nav doc-menu hidden-xs" data-spy="affix">
+                                <li><a class="scrollto" href="#user-content-motion-detection-and-object-tracking-plugins">Motion Detection and Object Tracking Plugins</a></li>
+                                <li><a class="scrollto" href="#user-content-why-arent-these-just-integrated">Why aren’t these just integrated?</a></li>
+                                <li><a class="scrollto" href="#user-content-shinobi-stemkoski-motion-detector">Shinobi Motion Detector</a></li>
+                                <% include blocks/menu-options.ejs %>
+                            </ul><!--//doc-menu-->
+                        </nav>
+                    </div><!--//doc-sidebar-->
+                </div><!--//doc-body-->              
+            </div><!--//container-->
+        </div><!--//doc-wrapper-->
+    </div><!--//page-wrapper-->
+<% include blocks/footer.ejs %>
+</body>
+</html> 
+
