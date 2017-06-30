@@ -1,6 +1,6 @@
 [
     {
-        "description":"Install OpenCV without CUDA (Easy)",
+        "description":"Install OpenCV <b>without</b> CUDA <small>(Ubuntu - Easy)</small>",
         "blocks":[
             {
                 "text":"OpenCV is the base engine used for detection. You will find most object detection software uses OpenCV or something based on it."
@@ -10,7 +10,68 @@
                     {
                         "text":"Install libraries",
                         "code":"sudo apt-get install libopencv-dev python-opencv openalpr openalpr-daemon openalpr-utils libopenalpr-dev libcairo2-dev libjpeg-dev libpango1.0-dev libgif-dev build-essential g++"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description":"Install OpenCV <b>with</b> CUDA <small>(Ubuntu - Boring)</small>",
+        "blocks":[
+            {
+                "text":"<b>WARNING : </b> Only do this if you have a Nvidia graphics chip."
+            },
+            {
+                "orderList":[
+                    {
+                        "text":"Disable noveau, Create a file to do this.",
+                        "code":"sudo nano /etc/modprobe.d/blacklist-nouveau.conf"
                     },
+                    {
+                        "text":"Place these lines in the blank file.",
+                        "code":"blacklist nouveau<br>options nouveau modeset=0"
+                    },
+                    {
+                        "text":"Update the system image. Reboot.",
+                        "code":"sudo update-initramfs -u<br>sudo reboot"
+                    },
+                    {
+                        "text":"Download CUDA 8.0.",
+                        "code":"wget https://developer.nvidia.com/compute/cuda/8.0/prod/local_installers/cuda_8.0.44_linux-run"
+                    },
+                    {
+                        "text":"You must stop your GPU to install CUDA.",
+                        "code":"sudo service lightdm stop<br>sudo chmod +x cuda_8.0.44_linux-run<br>sudo ./cuda_8.0.44_linux-run"
+                    },
+                    {
+                        "text":"Edit Environment variables.",
+                        "code":"nano ~/.bashrc"
+                    },
+                    {
+                        "text":"Add these lines to the end of <code>~/.bashrc</code>",
+                        "code":"export LD_LIBRARY_PATH=\"$LD_LIBRARY_PATH:/usr/local/cuda/lib64\"<br>export CUDA_HOME=/usr/local/cuda<br>export DYLD_LIBRARY_PATH=\"$DYLD_LIBRARY_PATH:$CUDA_HOME/lib\"<br>export PATH=\"$CUDA_HOME/bin:$PATH\""
+                    },
+                    {
+                        "text":"Install libraries",
+                        "code":"sudo apt-get update && sudo apt-get install git libopencv-dev build-essential checkinstall cmake pkg-config yasm libtiff5-dev libjpeg-dev libjasper-dev libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev libxine2-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev libv4l-dev python-dev python-numpy libtbb-dev libqt4-dev libgtk2.0-dev libfaac-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev libvorbis-dev libxvidcore-dev x264 v4l-utils libjpeg-dev libpango1.0-dev libgif-dev g++ openalpr openalpr-daemon openalpr-utils libopenalpr-dev"
+                    },
+                    {
+                        "text":"Download the source for OpenCV",
+                        "code":"git clone https://github.com/opencv/opencv.git opencv"
+                    },
+                    {
+                        "text":"Build the Installer for OpenCV from the source files",
+                        "code":"cd opencv<br>mkdir release<br>cd release<br>cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D WITH_QT=ON -D WITH_OPENGL=ON -D ENABLE_FAST_MATH=1 -D CUDA_FAST_MATH=1 -D WITH_CUBLAS=1 ..  "
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description":"Install the Shinobi Plugin",
+        "blocks":[
+            {
+                "orderList":[
                     {
                         "text":"Navigate to your Shinobi directory and install the node.js wrappers needed to run the plugin.",
                         "code":"npm install opencv canvas"
@@ -32,35 +93,7 @@
                         "code":"pm2 start plugins/opencv/shinobi-opencv.js"
                     },
                     {
-                        "text":"When complete you will see <code>Detector : OpenCV Connected</code> in your Monitor Settings"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "description":"Install OpenCV with CUDA",
-        "blocks":[
-            {
-                "text":"OpenCV is the base engine used for detection. You will find most object detection software uses OpenCV or something based on it."
-            },
-            {
-                "orderList":[
-                    {
-                        "text":"Install libraries",
-                        "code":"sudo apt-get update && sudo apt-get install git libopencv-dev build-essential checkinstall cmake pkg-config yasm libtiff5-dev libjpeg-dev libjasper-dev libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev libxine2-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev libv4l-dev python-dev python-numpy libtbb-dev libqt4-dev libgtk2.0-dev libfaac-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev libvorbis-dev libxvidcore-dev x264 v4l-utils libjpeg-dev libpango1.0-dev libgif-dev g++ openalpr openalpr-daemon openalpr-utils libopenalpr-dev"
-                    },
-                    {
-                        "text":"Download the source for OpenCV",
-                        "code":"git clone https://github.com/opencv/opencv.git opencv"
-                    },
-                    {
-                        "text":"Build the Installer for OpenCV from the source files",
-                        "code":"cd opencv<br>mkdir release<br>cd release<br>cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D WITH_QT=ON -D WITH_OPENGL=ON -D ENABLE_FAST_MATH=1 -D CUDA_FAST_MATH=1 -D WITH_CUBLAS=1 ..  "
-                    },
-                    {
-                        "text":"Navigate to your Shinobi directory and install the node.js wrappers needed to run the plugin.",
-                        "code":"npm install opencv canvas"
+                        "text":"When complete you will see <code>Detector : OpenCV Connected</code> in your Monitor Settings. Shinobi does not need to be restarted unless you modified the <code>PluginKeys</code> in <code>conf.json</code>"
                     }
                 ]
             }
