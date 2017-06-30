@@ -74,7 +74,7 @@
                 "orderList":[
                     {
                         "text":"Navigate to your Shinobi directory and install the node.js wrappers needed to run the plugin.",
-                        "code":"npm install opencv canvas"
+                        "code":"npm install opencv canvas moment"
                     },
                     {
                         "text":"Setup the configuration file for the plugin.",
@@ -94,6 +94,24 @@
                     },
                     {
                         "text":"When complete you will see <code>Detector : OpenCV Connected</code> in your Monitor Settings. Shinobi does not need to be restarted unless you modified the <code>PluginKeys</code> in <code>conf.json</code>"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description":"Once Installed",
+        "blocks":[
+            {
+                "text":"Important information to note are as follows."
+            },
+            {
+                "list":[
+                    {
+                        "text":"<code>Monitor Settings > Detector > Send Frames : </code> Enabling this will push frames to your detection plugin for analyzation, in this case OpenCV."
+                    },
+                    {
+                        "text":"<code>Monitor Settings > Detector > Detect Objects : </code> Enabling this will reveal a list of usable cascades. If you do not have any cascades a link will be provided in the dashboard or you can get on over to the public <a href=\"https://github.com/ShinobiCCTV/OpenCVcascades\" target=\"_blank\">repository on Github.</a>"
                     }
                 ]
             }

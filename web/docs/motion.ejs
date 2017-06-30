@@ -16,111 +16,61 @@
                 <div class="doc-body">
                     <div class="doc-content">
                         <div class="content-inner">
-                            <section id="stemkoski" class="doc-section">
+                            <section class="doc-section">
                                 <blockquote>
                                     If your <code>shinobi-motion.js</code> plugin is crashing try : setting the dimenions to 320x240. Pressing save, then modifying your regions if you have to and once again saving the settings.
                                 </blockquote>
-<div class="markdown-body">
-        <p>To use a <b>Plugin</b> please refer to the <a href="/docs/plugins">Plugins</a> page</p>
-<h2>
-<a id="user-content-motion-detection-and-object-tracking-plugins" class="anchor" href="#motion-detection-and-object-tracking-plugins" aria-hidden="true"></a>Motion Detection and Object Tracking Plugins</h2>
-<table class="table table-striped">
-  <tbody><tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-<th>Warnings</th>
-</tr>
-  <tr>
-<td>Motion Detector</td>
-<td>Node.js, <b>shinobi-motion.js</b>
-</td>
-<td>This is a method for reading differences in frames with the <a href="https://github.com/Automattic/node-canvas">node-canvas</a>. This method includes region detection similar to ZoneMinder's zone detection.</td>
-<td></td>
-</tr>
-  <tr>
-<td>OpenCV Object Tracker</td>
-<td>Node.js, <b>shinobi-opencv.js</b>
-</td>
-<td>This is an object tracker interfaced through a Node.js wrapper.</td>
-<td>Frame input is limited to 1 fps or you will get Segmentation errors causing the plugin to crash.</td>
-</tr>
-  <tr>
-<td>OpenCV Object Tracker</td>
-<td>Python, <b>shinobi-opencv.py</b>
-</td>
-<td>An attempt at copying the node.js version.</td>
-<td><b>Currently does not work. Process will not stay alive for requests.</b></td>
-</tr>
-  <tr>
-<td>CCV.js Object Tracker</td>
-<td>Node.js, <b>shinobi-ccv.js</b>
-</td>
-<td>Currently only a face detector. The current cascade can be replaced.</td>
-<td>Uses a lot of CPU power, like a lot.</td>
-</tr>
-</tbody></table>
-<iframe data-aa='495587' src='//ad.a-ads.com/495587?size=728x90' scrolling='no' style='width:728px; height:90px; border:0px; padding:0;overflow:hidden' allowtransparency='true'></iframe>
-<h2>
-<a id="user-content-why-arent-these-just-integrated" class="anchor" href="#why-arent-these-just-integrated" aria-hidden="true"></a>Why aren’t these just integrated?</h2>
-<p>Not everyone uses motion detection or object tracking and the libraries required can be bothersome to install, based on the OS. For example if I make shinobi-opencv.js a feature then everyone will be required to install OpenCV 2.4 just to use basic features in Shinobi. This also allows us to swap the plugin with a custom one or run it on another machine entirely. Sharing the work between multiple machines can be a great way to optimize performance.</p>
-
-      </div>
-                            </section>
-<iframe data-aa='495587' src='//ad.a-ads.com/495587?size=728x90' scrolling='no' style='width:728px; height:90px; border:0px; padding:0;overflow:hidden' allowtransparency='true'></iframe>
-                            <section id="stemkoski" class="doc-section">
-<h1><a id="user-content-shinobi-stemkoski-motion-detector" class="anchor" href="#shinobi-stemkoski-motion-detector" aria-hidden="true"></a>Shinobi Motion Detector</h1>
-
-<p>Installing Motion Detection plugin for Shinobi. Method used is based on <a href="https://stemkoski.github.io/Three.js/Webcam-Motion-Detection.html">JS Motion Detection</a>.</p>
-
-<div class="row">
-<div class="section-block col-md-6">
-<h3 class="block-title question">Ubuntu / Debian</h3>
-<pre><code>sudo apt-get install libcairo2-dev libjpeg-dev libpango1.0-dev libgif-dev build-essential g++
-</code></pre>
-</div>
-
-<div class="section-block col-md-6">
-<h3 class="block-title question">CentOS / Fedora</h3>
-<pre><code>sudo yum install cairo-devel libjpeg-turbo-devel giflib-devel -y
-</code></pre>
-</div>
-</div>
-<p>Install the Node.js Canvas engine</p>
-
-<pre><code>sudo npm install canvas
-</code></pre>
-
-<p>Navigate to directory for the motion plugin.</p>
-
-<pre><code>cd plugins/motion
-</code></pre>
-                                
-<p>Copy the config file.</p>
-
-<pre><code>cp conf.sample.json conf.json
-</code></pre>
-
-<p>Edit it the new file. Host should be <code>localhost</code> and port should match the <code>listening port for camera.js</code>.</p>
-
-<pre><code>nano conf.json
-</code></pre>
-
-<p>Start the plugin.</p>
-
-<pre><code>node shinobi-motion.js
-</code></pre>
-
-<p>Or to daemonize with PM2.</p>
-
-<pre><code>pm2 start shinobi-motion.js
-</code></pre>
-
-<p>Doing this will reveal options in the monitor configuration. Shinobi does not need to be restarted when a plugin is initiated or stopped.</p>
-
-<p><em>Thanks to Cairo and others for these dependencies. Thanks to stemkoski as the JS image comparing is based on their research. Shinobi is not affiliated with stemkoski or Cairo.</em></p>
-
-<p>Shinobi Plugin by : Moe Alam</p>
+<% pageData.forEach(function(v,n){ %>
+    <div class="section-block">
+        <h3 class="block-title question"><a id="content-<%- link_id(v.description) %>" href="#content-<%- link_id(v.description) %>" class="text-faded"><i class="fa fa-paperclip"></i></a>  <%- v.description %></h3>
+        <% v.blocks.forEach(function(b,m){ %>
+            <% var drawListItems = function(b,m){ %>
+                <li>
+                    <% Object.keys(b).forEach(function(t,y){ %>
+                        <% switch(t){
+                        case 'text': %>
+                            <div><p><%- b[t] %></p></div>
+                        <% break;
+                        case 'code': %>
+                            <pre><code><%- b[t] %></code></pre>
+                        <% break;
+                        case 'list': %>
+                            <ul>
+                                <% b[t].forEach(drawListItems) %>
+                            </ul>
+                        <% break;
+                        case 'orderList': %>
+                            <ol>
+                                <% b[t].forEach(drawListItems) %>
+                            </ol>
+                        <% break; %>
+                        <% } %>
+                    <% }) %>
+                </li>
+            <% } %>
+            <% Object.keys(b).forEach(function(t,y){ %>
+                <% switch(t){
+                case 'text': %>
+                    <div><p><%- b[t] %></p></div>
+                <% break;
+                case 'code': %>
+                    <pre><code><%- b[t] %></code></pre>
+                <% break;
+                case 'list': %>
+                    <ul>
+                        <% b[t].forEach(drawListItems) %>
+                    </ul>
+                <% break;
+                case 'orderList': %>
+                    <ol>
+                        <% b[t].forEach(drawListItems) %>
+                    </ol>
+                <% break; %>
+                <% } %>
+            <% }) %>
+        <%  }) %>
+    </div>
+<%  }) %>
                             </section><!--//doc-section-->
 <iframe data-aa='495587' src='//ad.a-ads.com/495587?size=728x90' scrolling='no' style='width:728px; height:90px; border:0px; padding:0;overflow:hidden' allowtransparency='true'></iframe>
 
@@ -131,7 +81,9 @@
                             <ul id="doc-menu" class="nav doc-menu hidden-xs" data-spy="affix">
                                 <li><a class="scrollto" href="#user-content-motion-detection-and-object-tracking-plugins">Motion Detection and Object Tracking Plugins</a></li>
                                 <li><a class="scrollto" href="#user-content-why-arent-these-just-integrated">Why aren’t these just integrated?</a></li>
-                                <li><a class="scrollto" href="#user-content-shinobi-stemkoski-motion-detector">Shinobi Motion Detector</a></li>
+                         <% pageData.forEach(function(v){ %>
+                                <li><a class="scrollto" href="#content-<%-link_id(v.description)%>"><%-v.description%></a></li>
+                            <% }) %>
                                 <% include blocks/menu-options.ejs %>
                             </ul><!--//doc-menu-->
                         </nav>
