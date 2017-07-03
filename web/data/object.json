@@ -9,7 +9,7 @@
                 "orderList":[
                     {
                         "text":"Install libraries",
-                        "code":"sudo apt-get install libopencv-dev python-opencv openalpr openalpr-daemon openalpr-utils libopenalpr-dev libcairo2-dev libjpeg-dev libpango1.0-dev libgif-dev build-essential g++"
+                        "code":"sudo apt update && sudo apt install git libopencv-dev python-opencv openalpr openalpr-daemon openalpr-utils libopenalpr-dev libcairo2-dev libjpeg-dev libpango1.0-dev libgif-dev build-essential g++"
                     }
                 ]
             }
@@ -44,12 +44,8 @@
                         "code":"sudo service lightdm stop<br>sudo chmod +x cuda_8.0.44_linux-run<br>sudo ./cuda_8.0.44_linux-run"
                     },
                     {
-                        "text":"Edit Environment variables.",
-                        "code":"nano ~/.bashrc"
-                    },
-                    {
-                        "text":"Add these lines to the end of <code>~/.bashrc</code>",
-                        "code":"export LD_LIBRARY_PATH=\"$LD_LIBRARY_PATH:/usr/local/cuda/lib64\"<br>export CUDA_HOME=/usr/local/cuda<br>export DYLD_LIBRARY_PATH=\"$DYLD_LIBRARY_PATH:$CUDA_HOME/lib\"<br>export PATH=\"$CUDA_HOME/bin:$PATH\""
+                        "text":"Download and Install CuDNN from <a href=\"https://developer.nvidia.com/cudnn\">Nvidia's Website</a>a.",
+                        "code":"<i>Install Example : dpkg -i ./libcudnn6_6.0.21-1+cuda8.0_amd64.deb</i>"
                     },
                     {
                         "text":"Install libraries",
@@ -57,11 +53,19 @@
                     },
                     {
                         "text":"Download the source for OpenCV",
-                        "code":"git clone https://github.com/opencv/opencv.git opencv"
+                        "code":"git clone https://github.com/opencv/opencv.git -b 2.4 opencv"
                     },
                     {
                         "text":"Build the Installer for OpenCV from the source files",
-                        "code":"cd opencv<br>mkdir release<br>cd release<br>cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D WITH_QT=ON -D WITH_OPENGL=ON -D ENABLE_FAST_MATH=1 -D CUDA_FAST_MATH=1 -D WITH_CUBLAS=1 ..  "
+                        "code":"cd opencv<br>mkdir release<br>cd release<br>cmake -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_NVCUVID=ON -D BUILD_DOCS=ON -D WITH_XINE=ON -D WITH_CUDA=ON -D WITH_OPENGL=ON -D WITH_TBB=ON -D WITH_OPENNI=ON -D BUILD_EXAMPLES=ON -D WITH_OPENCL=ON -D CMAKE_BUILD_TYPE=RELEASE -D OPENCV_EXTRA_MODULES_PATH=../modules/opencv_contrib-master/modules/ -D ENABLE_FAST_MATH=1 -D CUDA_FAST_MATH=1 -D WITH_CUBLAS=1 .."
+                    },
+                    {
+                        "text":"When the installer is made you should see something like this somewhere just before the end.",
+                        "code":"--   NVIDIA CUDA<br>--     Use CUFFT:                   YES<br>--     Use CUBLAS:                  YES<br>--     USE NVCUVID:                 NO<br>--     NVIDIA GPU arch:             20 21 30 35<br>--     NVIDIA PTX archs:            30<br>--     Use fast math:               YES<br>--     Tiny gpu module:             NO"
+                    },
+                    {
+                        "text":"Install OpenCV. This is the boring part.",
+                        "code":"make<br>make install"
                     }
                 ]
             }
@@ -73,8 +77,16 @@
             {
                 "orderList":[
                     {
+                        "text":"<b>OPTIONAL : </b> If you are already root user you must return to a regular user.",
+                        "code":"exit"
+                    },
+                    {
+                        "text":"Navigate to your Shinobi directory, where you downloaded the Shinobi files to.",
+                        "code":"<i>Example : </i>cd /home/Shinobi"
+                    },
+                    {
                         "text":"Navigate to your Shinobi directory and install the node.js wrappers needed to run the plugin.",
-                        "code":"npm install opencv canvas moment"
+                        "code":"sudo npm install opencv canvas moment"
                     },
                     {
                         "text":"Setup the configuration file for the plugin.",
@@ -87,6 +99,10 @@
                     {
                         "text":"Check that your main configuration file, for the main Shinobi app, has a Plugin Key set. If one is not set the plugin will not work. You may review <code>conf.sample.json</code> to see the default setup.",
                         "code":"nano conf.json"
+                    },
+                    {
+                        "text":"Reutrn to root user.",
+                        "code":"sudo su"
                     },
                     {
                         "text":"Start the OpenCV plugin",
@@ -114,6 +130,14 @@
                         "text":"<code>Monitor Settings > Detector > Detect Objects : </code> Enabling this will reveal a list of usable cascades. If you do not have any cascades a link will be provided in the dashboard or you can get on over to the public <a href=\"https://github.com/ShinobiCCTV/OpenCVcascades\" target=\"_blank\">repository on Github.</a>"
                     }
                 ]
+            }
+        ]
+    },
+    {
+        "description":"Why aren't plugins just integrated?",
+        "blocks":[
+            {
+                "text":"Not everyone uses motion detection or object tracking and the libraries required can be bothersome to install, based on the OS. For example if I make shinobi-opencv.js a feature then everyone will be required to install OpenCV just to use basic features in Shinobi. This also allows us to swap the plugin with a custom one or run it on another machine entirely. Sharing the work between multiple machines can be a great way to optimize performance."
             }
         ]
     }

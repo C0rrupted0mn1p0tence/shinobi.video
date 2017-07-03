@@ -83,5 +83,13 @@
                 ]
             }
         ]
+    },
+    {
+        "description":"Why aren't plugins just integrated?",
+        "blocks":[
+            {
+                "text":"Not everyone uses motion detection or object tracking and the libraries required can be bothersome to install, based on the OS. For example if I make shinobi-opencv.js a feature then everyone will be required to install OpenCV just to use basic features in Shinobi. This also allows us to swap the plugin with a custom one or run it on another machine entirely. Sharing the work between multiple machines can be a great way to optimize performance."
+            }
+        ]
     }
 ]

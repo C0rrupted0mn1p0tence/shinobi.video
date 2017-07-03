@@ -30,16 +30,16 @@ pre {
     background: #222222;
     border-bottom: 1px solid #444;
 }
-.body-dark .doc-wrapper,.body-dark .cards-section{
+.doc-wrapper, .cards-section{
     padding: 0;
 }
 .body-dark .doc-wrapper>.container,.body-dark .cards-section>.container{
     background:#333;
 }
-.body-dark .doc-wrapper>.container:first-child,.body-dark .cards-section>.container:first-child{
+.doc-wrapper>.container:first-child,.cards-section>.container:first-child{
     padding-top:45px;
 }
-.body-dark .doc-wrapper>.container:last-child,.body-dark .cards-section>.container:last-child{
+.doc-wrapper>.container:last-child,.cards-section>.container:last-child{
     padding-bottom:45px;
 }
 
@@ -138,3 +138,4 @@ pre {
     color:#fff;border-color:#333;
 }
 blockquote{border-radius:10px}
+body:not(.body-dark) blockquote{border-color:#4285f4}

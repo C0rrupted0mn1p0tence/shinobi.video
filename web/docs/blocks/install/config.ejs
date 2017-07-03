@@ -184,5 +184,29 @@
 <td>object</td>
 <td>If your Email account uses 2-Step Authentication, like Gmail, then you will be require to create an Application Password.</td>
 </tr>
+  <tr>
+<td>ssl</td>
+<td>no</td>
+<td>object</td>
+<td>If you would to use SSL (Encryption) you can include this object.</td>
+</tr>
+  <tr>
+<td>ssl.key</td>
+<td>yes*</td>
+<td>string</td>
+<td>Required if SSL object is present. This is a reference to a file that usually ends in <b>.key</b>.<br><i>Example : ssl/server.key</i> will direct to a folder named <b>ssl</b> inside your Shinobi directory.</td>
+</tr>
+  <tr>
+<td>ssl.cert</td>
+<td>yes*</td>
+<td>string</td>
+<td>Required if SSL object is present. This is a reference to a file that usually ends in <b>.crt</b>.<br><i>Example : ssl/server.crt</i> will direct to a folder named <b>ssl</b> inside your Shinobi directory.</td>
+</tr>
+  <tr>
+<td>ssl.port</td>
+<td>no</td>
+<td>int</td>
+<td>This is the port SSL will listen on. If option is left undefined <b>443</b> will be used.</td>
+</tr>
 </tbody></table>
 </div>
