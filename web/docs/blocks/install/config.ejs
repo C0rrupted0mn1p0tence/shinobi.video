@@ -203,6 +203,12 @@
 <td>Required if SSL object is present. This is a reference to a file that usually ends in <b>.crt</b>.<br><i>Example : ssl/server.crt</i> will direct to a folder named <b>ssl</b> inside your Shinobi directory.</td>
 </tr>
   <tr>
+<td>ssl.passphrase</td>
+<td>yes*</td>
+<td>string</td>
+<td>If your key and certificate use a passphrase you must define it or SSL will not start.</td>
+</tr>
+  <tr>
 <td>ssl.port</td>
 <td>no</td>
 <td>int</td>
