@@ -3,21 +3,29 @@
         "description":"The Ninja Way",
         "blocks":[
             {
-                "text":"The easiest way to install, directly on metal, is through NPM."
-            },
-            {
-                "orderList":[
+                "text":"The easiest way to install, directly on metal, is through NPM. The following operating systems are supported.",
+                "list":[
                     {
-                        "text":"<b>Ubuntu / Debian</b> - Download and Install Node.js, NPM, and wget (or curl).",
-                        "code":"sudo apt install nodejs npm wget -y"
+                        "text":"Ubuntu 16, Ubuntu 17, Debian"
+                    },
+                    {
+                        "text":"CentOS, Fedora, RHEL"
                     }
                 ]
             },
             {
                 "orderList":[
                     {
-                        "text":"<b>CentOS / RHEL</b> - Download and Install Node.js, NPM, and wget (or curl).",
-                        "code":"sudo yum install nodejs npm wget -y"
+                        "text":"<b>Ubuntu / Debian</b> - Download and Install Node.js, NPM.",
+                        "code":"apt update<br>sudo apt install curl -y<br>curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -<br>sudo apt install nodejs npm gnupg2 -y"
+                    }
+                ]
+            },
+            {
+                "orderList":[
+                    {
+                        "text":"<b>CentOS / RHEL</b> - Download and Install Node.js, NPM.",
+                        "code":"yum update<br>sudo yum install curl -y<br>curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -<br>sudo yum install nodejs npm -y"
                     },
                     {
                         "text":"Install Shinobi",
@@ -62,10 +70,7 @@
                         "text":"Click the <b>Web Address with 8083</b> next to it. You will be presented with a login screen. The default credentials are as follows.",
                         "list":[
                             {
-                                "text":"Username : ccio@m03.ca"
-                            },
-                            {
-                                "text":"Password : password"
+                                "code":"Username : ccio@m03.ca<br>Password : password"
                             }
                         ]
                     },
@@ -73,23 +78,10 @@
                         "text":"Updating :</b> Restart the shinobi docker instance to update the following files and folders. They will be overwritten.",
                         "list":[
                             {
-                                "text":"camera.js"
-                            },
-                            {
-                                "text":"cron.js"
-                            },
-                            {
-                                "text":"plugins/motion/shinobi-motion.js"
-                            },
-                            {
-                                "text":"UPDATE.sh"
-                            },
-                            {
-                                "text":"web/"
+                                "code":"- camera.js<br>- cron.js<br>- plugins/motion/shinobi-motion.js<br>- plugins/opencv/shinobi-opencv.js<br>- UPDATE.sh<br>- web/"
                             }
                         ]
                     },
-
                     {
                         "text":"Enjoy!",
                         "list":[
@@ -97,6 +89,106 @@
                                 "text":"<a target=\"_blank\" href=\"https://www.youtube.com/watch?v=hRsp9pMh1M4\">How to add more CPUs to VirtualBox</a>"
                             }
                         ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description":"Ubuntu, Debian : The Easier Way",
+        "blocks":[
+            {
+                "text":"This installer works well with Ubuntu 16 and 17, as well as Debian 9."
+            },
+            {
+                "orderList":[
+                    {
+                        "text":"Open <code>Terminal</code>."
+                    },
+                    {
+                        "text":"Install git command line library.",
+                        "code":"apt install git -y"
+                    },
+                    {
+                        "text":"Pull the <code>master</code> repository.",
+                        "code":"git clone https://github.com/moeiscool/Shinobi.git Shinobi"
+                    },
+                    {
+                        "text":"Open Shinobi directory.",
+                        "code":"cd Shinobi"
+                    },
+                    {
+                        "text":"Start the installer",
+                        "code":"chmod +x INSTALL/ubuntu.sh && INSTALL/ubuntu.sh"
+                    },
+                    {
+                        "text":"Packages will be installed. MariaDB will ask to create a password on first installation."
+                    },
+                    {
+                        "text":"Once complete. Open up <code>http://localhost:8080</code> in your browser.",
+                        "list":[
+                            {
+                                "text":"<b>Note :</b> if you are installed on a remote computer open up the IP in your web browser."
+                            }
+                        ]
+                    },
+                    {
+                        "text":"Default credentials are as follows if you chose to install <code>default_data.sql</code>.",
+                        "code":"Username : ccio@m03.ca<br>Password : password"
+                    },
+                    {
+                        "text":"To update Shinobi with git and restart :",
+                        "code":"cd Shinobi<br>git pull<br>pm2 restart camera.js<br>pm2 restart cron.js"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description":"CentOS, Fedora, RHEL : The Easier Way",
+        "blocks":[
+            {
+                "text":"This installer works well with CentOS 7."
+            },
+            {
+                "orderList":[
+                    {
+                        "text":"Open <code>Terminal</code>."
+                    },
+                    {
+                        "text":"Install git command line library.",
+                        "code":"yum install git -y"
+                    },
+                    {
+                        "text":"Pull the <code>master</code> repository.",
+                        "code":"git clone https://github.com/moeiscool/Shinobi.git Shinobi"
+                    },
+                    {
+                        "text":"Open Shinobi directory.",
+                        "code":"cd Shinobi"
+                    },
+                    {
+                        "text":"Start the installer",
+                        "code":"chmod +x INSTALL/centos.sh && INSTALL/centos.sh"
+                    },
+                    {
+                        "text":"Packages will be installed. MariaDB will ask to create a password on first installation."
+                    },
+                    {
+                        "text":"Once complete. Open up <code>http://localhost:8080</code> in your browser.",
+                        "list":[
+                            {
+                                "text":"<b>Note :</b> if you are installed on a remote computer open up the IP in your web browser."
+                            }
+                        ]
+                    },
+                    {
+                        "text":"Default credentials are as follows if you chose to install <code>default_data.sql</code>.",
+                        "code":"Username : ccio@m03.ca<br>Password : password"
+                    },
+                    {
+                        "text":"To update Shinobi with git and restart :",
+                        "code":"cd Shinobi<br>git pull<br>pm2 restart camera.js<br>pm2 restart cron.js"
                     }
                 ]
             }
