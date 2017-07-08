@@ -62,6 +62,59 @@
                             </section><!--//doc-section-->
                             <section id="installation-section" class="doc-section">
                                 <h2 class="section-title">Installation</h2>
+                               <% pageData.forEach(function(v,n){ %>
+                                    <div class="section-block">
+                                        <h3 class="block-title question"><a id="content-<%- link_id(v.description) %>" href="#content-<%- link_id(v.description) %>" class="text-faded"><i class="fa fa-paperclip"></i></a>  <%- v.description %></h3>
+                                        <% v.blocks.forEach(function(b,m){ %>
+                                            <% var drawListItems = function(b,m){ %>
+                                                <li>
+                                                    <% Object.keys(b).forEach(function(t,y){ %>
+                                                        <% switch(t){
+                                                        case 'text': %>
+                                                            <div><p><%- b[t] %></p></div>
+                                                        <% break;
+                                                        case 'code': %>
+                                                            <pre><code><%- b[t] %></code></pre>
+                                                        <% break;
+                                                        case 'list': %>
+                                                            <ul>
+                                                                <% b[t].forEach(drawListItems) %>
+                                                            </ul>
+                                                        <% break;
+                                                        case 'orderList': %>
+                                                            <ol>
+                                                                <% b[t].forEach(drawListItems) %>
+                                                            </ol>
+                                                        <% break; %>
+                                                        <% } %>
+                                                    <% }) %>
+                                                </li>
+                                            <% } %>
+                                            <% Object.keys(b).forEach(function(t,y){ %>
+                                                <% switch(t){
+                                                case 'text': %>
+                                                    <div><p><%- b[t] %></p></div>
+                                                <% break;
+                                                case 'code': %>
+                                                    <pre><code><%- b[t] %></code></pre>
+                                                <% break;
+                                                case 'list': %>
+                                                    <ul>
+                                                        <% b[t].forEach(drawListItems) %>
+                                                    </ul>
+                                                <% break;
+                                                case 'orderList': %>
+                                                    <ol>
+                                                        <% b[t].forEach(drawListItems) %>
+                                                    </ol>
+                                                <% break; %>
+                                                <% } %>
+                                            <% }) %>
+                                        <%  }) %>
+                                    </div>
+                                <%  }) %>
+                                <% include blocks/install/ninja.ejs %>
+<iframe data-aa='495587' src='//ad.a-ads.com/495587?size=728x90' scrolling='no' style='width:728px; height:90px; border:0px; padding:0;overflow:hidden' allowtransparency='true'></iframe>
                                 <% include blocks/install/docker.ejs %>
 <iframe data-aa='495587' src='//ad.a-ads.com/495587?size=728x90' scrolling='no' style='width:728px; height:90px; border:0px; padding:0;overflow:hidden' allowtransparency='true'></iframe>
                                 <% include blocks/install/ubuntu_easy.ejs %>
@@ -117,6 +170,7 @@
                                 <li>
                                     <a class="scrollto" href="#installation-section">Installation</a>
                                     <ul class="nav doc-sub-menu">
+                                        <li><a class="scrollto" href="#ninja">The Ninja Way</a></li>
                                         <li><a class="scrollto" href="#docker">Docker : The Easiest Way</a></li>
                                         <li><a class="scrollto" href="#setup_ubuntu_easy">Ubuntu 16.04 : The Easier Way</a></li>
                                         <li><a class="scrollto" href="#setup_ubuntu_hard">Ubuntu 16.04 : The Harder Way</a></li>

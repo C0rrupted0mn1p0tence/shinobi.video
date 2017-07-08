@@ -1,0 +1,105 @@
+[
+    {
+        "description":"The Ninja Way",
+        "blocks":[
+            {
+                "text":"The easiest way to install, directly on metal, is through NPM."
+            },
+            {
+                "orderList":[
+                    {
+                        "text":"<b>Ubuntu / Debian</b> - Download and Install Node.js, NPM, and wget (or curl).",
+                        "code":"sudo apt install nodejs npm wget -y"
+                    }
+                ]
+            },
+            {
+                "orderList":[
+                    {
+                        "text":"<b>CentOS / RHEL</b> - Download and Install Node.js, NPM, and wget (or curl).",
+                        "code":"sudo yum install nodejs npm wget -y"
+                    },
+                    {
+                        "text":"Install Shinobi",
+                        "code":"mkdir Shinobi<br>cd Shinobi<br>npm install shinobi<br>mv node_modules/shinobi/* .<br>npm start"
+                    },
+                    {
+                        "text":"You will be asked a series of questions throughout the installation."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "description":"Docker : Kitematic",
+        "blocks":[
+            {
+                "text":"The easiest way to install is Docker and Kitematic.",
+                "list":[
+                    {
+                        "text":"Shinobi on <a href=\"https://hub.docker.com/r/shinobicctv/shinobi/\">Docker Hub</a>"
+                    },
+                    {
+                        "text":"Kitematic on <a href=\"https://github.com/docker/kitematic\">Github</a>"
+                    }
+                ]
+            },
+            {
+                "orderList":[
+                    {
+                        "text":"Download and Install Kitematic"
+                    },
+                    {
+                        "text":"Search for Shinobi on Kitematic and click <b>...</b> Then select the tag <b>kitematic</b>. Then click <b>Create</b>.<br><img src=\"/libs/assets/docs/docker1.jpg\" style=\"max-width:100%\">"
+                    },
+                    {
+                        "text":"Once completed you should see a window like this.<br><img src=\"/libs/assets/docs/docker2.jpg\" style=\"max-width:100%\">"
+                    },
+                    {
+                        "text":"Click the <b>Settings</b> tab on the right then click <b>Ports</b> just below it.<br><img src=\"/libs/assets/docs/docker3.jpg\" style=\"max-width:100%\">"
+                    },
+                    {
+                        "text":"Click the <b>Web Address with 8083</b> next to it. You will be presented with a login screen. The default credentials are as follows.",
+                        "list":[
+                            {
+                                "text":"Username : ccio@m03.ca"
+                            },
+                            {
+                                "text":"Password : password"
+                            }
+                        ]
+                    },
+                    {
+                        "text":"Updating :</b> Restart the shinobi docker instance to update the following files and folders. They will be overwritten.",
+                        "list":[
+                            {
+                                "text":"camera.js"
+                            },
+                            {
+                                "text":"cron.js"
+                            },
+                            {
+                                "text":"plugins/motion/shinobi-motion.js"
+                            },
+                            {
+                                "text":"UPDATE.sh"
+                            },
+                            {
+                                "text":"web/"
+                            }
+                        ]
+                    },
+
+                    {
+                        "text":"Enjoy!",
+                        "list":[
+                            {
+                                "text":"<a target=\"_blank\" href=\"https://www.youtube.com/watch?v=hRsp9pMh1M4\">How to add more CPUs to VirtualBox</a>"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

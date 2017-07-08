@@ -17,52 +17,6 @@
                     <div class="doc-content">
                         <div class="content-inner">
                             <section id="general" class="doc-section">
-                               <div class="section-block">
-<h1><a id="using-a-plugin" class="anchor" href="#using-a-plugin" aria-hidden="true"></a>Using a Plugin</h1>
-
-<h3 class="block-title question">
-<a id="we-will-use-shinobi-opencvjs-a-nodejs-plugin-for-the-example" class="anchor" href="#we-will-use-shinobi-opencvjs-a-nodejs-plugin-for-the-example" aria-hidden="true"></a>We will use <code>shinobi-opencv.js</code>, a node.js plugin, for the example.</h3>
-
-<ol>
-<li>Locate the plugin and install it's required dependencies.
-
-<ul>
-<li>In this case it is <code>OpenCV 2.4.9</code> and the npm called <code>opencv</code>.</li>
-</ul>
-</li>
-<li>
-<p>OpenCV 2.4.9 will be installed with <code>install_opencv_2.4.sh</code>. Run the following to make it executable.</p>
-
-<pre><code>chmod +x install_opencv_2.4.sh
-</code></pre>
-</li>
-<li>
-<p>Copy the plugin configuration file.</p>
-
-<pre><code>cp conf.sample.json conf.json
-</code></pre>
-</li>
-<li>
-<p>Edit the configuration file. <code>host</code> should be localhost if it is on the same server. <code>port</code> is the chosen port for Shinobi.</p>
-
-<pre><code>nano conf.json
-</code></pre>
-</li>
-<li>
-<p><strong>Go back to main Shinobi directory.</strong> As regular user run the following to install the npm for opencv.</p>
-
-<pre><code>sudo npm install opencv
-</code></pre>
-</li>
-<li>
-<p>Run the plugin from Shinobi directroy after <code>camera.js</code> is running.</p>
-
-<pre><code>pm2 start plugins/opencv/shinobi-opencv.js
-</code></pre>
-</li>
-<li><p>In the <strong>Edit or Add Monitor</strong> window you should see <code>OpenCV Connected</code> inside the orange box labelled <strong>Detector</strong>. More options should also have appeared.</p></li>
-</ol>
-</div>
 <div class="section-block">
 <h1>
 <a id="contributing-a-plugin" class="anchor" href="#contributing-a-plugin" aria-hidden="true"></a>Contributing a Plugin</h1>
@@ -130,9 +84,15 @@
                     <div class="doc-sidebar">
                         <nav id="doc-nav">
                             <ul id="doc-menu" class="nav doc-menu hidden-xs" data-spy="affix">
-                                <li><a class="scrollto" href="#using-a-plugin">Using a Plugin</a></li>
                                 <li><a class="scrollto" href="#contributing-a-plugin">Contributing a Plugin</a></li>
                                 <li><a class="scrollto" href="#why-socketio-for-transport">Why Socket.io for transport?</a></li>
+                                <li>
+                                    <ul class="nav doc-sub-menu">
+                                        <li><a href="/docs/motion">Motion Detection</a></li>
+                                        <li><a href="/docs/object">Object Detection</a></li>
+                                        <li><a href="https://github.com/mafischer/shinobi-doorbird-plugin" target="_blank">Doorbird by Michael Fischer</a></li>
+                                    </ul>
+                                </li>
                                 <% include blocks/menu-options.ejs %>
                             </ul><!--//doc-menu-->
                         </nav>

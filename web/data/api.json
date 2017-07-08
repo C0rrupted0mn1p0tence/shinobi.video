@@ -4,7 +4,7 @@
         "blocks":[
             {
                 "text":"Provide your login credentials. <code>machineID</code> can be anything.",
-                "code":"$.post('http://xxx.xxx.xxx.xxx/?json=true',{machineID: \"fMUVxYdG1X3hWb7GNkTd\", mail: \"ccio@m03.ca\", pass: \"123\", function: \"dash\"},function(d){<br>     console.log(d.data.$user)<br>})",
+                "code":"$.post('http://xxx.xxx.xxx.xxx/?json=true',{machineID: \"fMUVxYdG1X3hWb7GNkTd\", mail: \"ccio@m03.ca\", pass: \"123\", function: \"dash\"},function(d){<br>     console.log(d.$user)<br>})",
                 "list":[
                     "<b>mail : </b> Address used to login.",
                     "<b>pass : </b> Password associated to the account being used to login.",

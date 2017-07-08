@@ -44,7 +44,7 @@
                         "code":"sudo service lightdm stop<br>sudo chmod +x cuda_8.0.44_linux-run<br>sudo ./cuda_8.0.44_linux-run"
                     },
                     {
-                        "text":"Download and Install CuDNN from <a href=\"https://developer.nvidia.com/cudnn\">Nvidia's Website</a>a.",
+                        "text":"Download and Install CuDNN from <a href=\"https://developer.nvidia.com/cudnn\">Nvidia's Website</a>.",
                         "code":"<i>Install Example : dpkg -i ./libcudnn6_6.0.21-1+cuda8.0_amd64.deb</i>"
                     },
                     {
@@ -61,7 +61,7 @@
                     },
                     {
                         "text":"When the installer is made you should see something like this somewhere just before the end.",
-                        "code":"--   NVIDIA CUDA<br>--     Use CUFFT:                   YES<br>--     Use CUBLAS:                  YES<br>--     USE NVCUVID:                 NO<br>--     NVIDIA GPU arch:             20 21 30 35<br>--     NVIDIA PTX archs:            30<br>--     Use fast math:               YES<br>--     Tiny gpu module:             NO"
+                        "code":"--   NVIDIA CUDA<br>--     Use CUFFT:                   YES<br>--     Use CUBLAS:                  YES<br>--     USE NVCUVID:                YES<br>--     NVIDIA GPU arch:             20 21 30 35<br>--     NVIDIA PTX archs:            30<br>--     Use fast math:               YES<br>--     Tiny gpu module:             NO"
                     },
                     {
                         "text":"Install OpenCV. This is the boring part.",
