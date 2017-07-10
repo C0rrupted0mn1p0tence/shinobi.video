@@ -17,7 +17,7 @@
                 "orderList":[
                     {
                         "text":"<b>Ubuntu / Debian</b> - Download and Install Node.js, NPM.",
-                        "code":"apt update<br>sudo apt install curl -y<br>curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -<br>sudo apt install nodejs npm gnupg2 -y"
+                        "code":"sudo apt update<br>sudo apt install curl -y<br>curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -<br>sudo apt install nodejs npm gnupg2 -y"
                     }
                 ]
             },
@@ -25,7 +25,7 @@
                 "orderList":[
                     {
                         "text":"<b>CentOS / RHEL</b> - Download and Install Node.js, NPM.",
-                        "code":"yum update<br>sudo yum install curl -y<br>curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -<br>sudo yum install nodejs npm -y"
+                        "code":"sudo yum update<br>sudo yum install curl -y<br>curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -<br>sudo yum install nodejs npm -y"
                     },
                     {
                         "text":"Install Shinobi",
