@@ -1,31 +1,27 @@
-<% 
-[
-    {
-        "id":"4MB6P",
-        "enabled":1,
-        "created":"2017/07/09 22:39",
-        "name":"H.O. SAFE 4MP Bullet HD IP Camera",
-        "description":"Metal Body, Bullet Style",
-        "dimensions":"4x3.5x8",
-        "dimensionsUnit":"in",
-        "weight":"16",
-        "weightUnit":"oz",
-        "tags":[
-            "Metal",
-            "RTSP"
-        ],
-        "images":[
-            "/libs/assets/cameras.png"
-        ],
-        "stripe":{
-            "name":"4MP HD IP Camera",
-            "description":"High Definition Camera for Home and Office.",
-            "currency":"usd",
-            "amount":150,
-            "bitcoin":true,
-            "billingAddress":true
-        }
-    }
-].forEach(function(v,n){ %>
-    
-<% }) %>
+<% config.Title='Shop';
+var products=JSON.parse(file_get_contents(__dirname+'/web/data/products.json','utf8'))
+%>
+<script src="https://checkout.stripe.com/checkout.js"></script>
+<script>var handler = StripeCheckout.configure({
+  key: 'pk_live_SjzKuxKHK0ascZEkjF82aQB9',
+  image: '/libs/assets/icon/mstile-310x310-circle.png',
+  locale: 'auto',
+  token: function(token) {
+    // You can access the token ID with `token.id`.
+    // Get the token ID to your server-side code for use.
+  }
+});
+</script>
+<% include blocks/header.ejs %>
+<% if(option&&option!==''&&products[option]){ 
+    var product=products[option]
+    product.stripe.description=product.shortDescription
+    product.stripe.currency=product.currency
+    product.stripe.amount=product.amount*100
+%>
+    <% include blocks/shop/product.ejs %>
+<% }else{ %>
+    <% include blocks/shop/store.ejs %>
+<% } %>
+<% include blocks/getstarted.ejs %>
+<% include blocks/footer.ejs %>

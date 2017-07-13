@@ -307,7 +307,7 @@ select {
 }
 /* ====== Header ====== */
 .header {
-  background: #494d55;
+  background: #122444;
   color: rgba(255, 255, 255, 0.85);
   border-top: 5px solid #40babd;
   padding: 30px 0;
@@ -1156,7 +1156,7 @@ select {
   margin-right: auto;
 }
 .cards-section .item {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 .cards-section .item .icon-holder {
   margin-bottom: 15px;
@@ -1172,8 +1172,9 @@ select {
   margin-bottom: 15px;
 }
 .cards-section .item-inner {
+  box-shadow: 0 0 10px #ddd;
   padding: 45px 30px;
-  background: #fff;
+  background: #f9f9fb;
   position: relative;
   border: 1px solid #f0f0f0;
   -webkit-border-radius: 4px;

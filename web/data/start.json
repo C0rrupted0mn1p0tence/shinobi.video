@@ -17,7 +17,7 @@
                 "orderList":[
                     {
                         "text":"<b>Ubuntu / Debian</b> - Download and Install Node.js, NPM.",
-                        "code":"sudo apt update<br>sudo apt install curl -y<br>curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -<br>sudo apt install nodejs npm gnupg2 -y"
+                        "code":"sudo apt update<br>sudo apt install curl gnupg2 -y<br>curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -<br>sudo apt install nodejs -y<br>sudo apt install npm -y"
                     }
                 ]
             },
@@ -29,7 +29,7 @@
                     },
                     {
                         "text":"Install Shinobi",
-                        "code":"mkdir Shinobi<br>cd Shinobi<br>npm install shinobi<br>mv node_modules/shinobi/* .<br>npm start"
+                        "code":"mkdir Shinobi<br>cd Shinobi<br>sudo npm install shinobi<br>mv node_modules/shinobi/* .<br>sudo npm start"
                     },
                     {
                         "text":"You will be asked a series of questions throughout the installation."
@@ -42,7 +42,7 @@
         "description":"Docker : Kitematic",
         "blocks":[
             {
-                "text":"The easiest way to install is Docker and Kitematic.",
+                "text":"<b>Docker is not officially supported and is not recommended.</b> The kitematic method is provided for those who wish to quickly test Shinobi. The Docker files included in the master and dev branches are maintained by the community. If you would like support with Docker please find a community member who maintains the Docker files or please refer to Docker's forum.",
                 "list":[
                     {
                         "text":"Shinobi on <a href=\"https://hub.docker.com/r/shinobicctv/shinobi/\">Docker Hub</a>"
@@ -106,6 +106,10 @@
                         "text":"Open <code>Terminal</code>."
                     },
                     {
+                        "text":"<b>Ubuntu / Debian</b> - Download and Install Node.js, NPM.",
+                        "code":"sudo apt update<br>sudo apt install curl gnupg2 -y<br>curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -<br>sudo apt install nodejs -y<br>sudo apt install npm -y"
+                    },
+                    {
                         "text":"Install git command line library.",
                         "code":"apt install git -y"
                     },
@@ -154,6 +158,10 @@
                 "orderList":[
                     {
                         "text":"Open <code>Terminal</code>."
+                    },
+                    {
+                        "text":"Download and Install Node.js, NPM.",
+                        "code":"sudo yum update<br>sudo yum install curl -y<br>curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -<br>sudo yum install nodejs npm -y"
                     },
                     {
                         "text":"Install git command line library.",

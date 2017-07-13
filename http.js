@@ -57,8 +57,8 @@ s.getBrands()
 app.use('/', express.static(process.cwd() + '/web'));
 app.set('views', __dirname + '/web');
 app.set('view engine', 'ejs');
-app.get('/google8b1d9d3a727f1256.html', function(req, res) {
-    fs.createReadStream('web/verifiers/google8b1d9d3a727f1256.html').pipe(res).end()
+app.get('/.well-known/apple-developer-merchantid-domain-association', function(req, res) {
+    res.sendFile(__dirname+'/web/verifiers/apple-developer-merchantid-domain-association')
 })
 //donations
 app.get('/donations.json', function(req, res) {
@@ -147,7 +147,7 @@ app.get(['/docs','/docs/:file'], function(req, res) {
     }
     res.render('docs/'+req.file,{config:config,pageData:req.pageData});
 });
-app.get(['/','/:file'], function(req, res) {
+app.get(['/','/:file','/:file/:option'], function(req, res) {
     req.pageDataFile='web/data/'+req.params.file+'.json';
     if(req.params.file&&fs.existsSync(req.pageDataFile)){
        try{req.pageData=JSON.parse(fs.readFileSync(req.pageDataFile,'utf8'));}catch(err){console.log(err)}
@@ -157,7 +157,7 @@ app.get(['/','/:file'], function(req, res) {
     }else{
         req.file='index';
     }
-    res.render('pages/'+req.file,{config:config,pageData:req.pageData});
+    res.render('pages/'+req.file,{config:config,pageData:req.pageData,file_get_contents:fs.readFileSync,__dirname:__dirname,option:req.params.option});
 });
 //start server
 app.listen(config.port,config.ip,function () {

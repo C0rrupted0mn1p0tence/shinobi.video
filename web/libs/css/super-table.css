@@ -28,7 +28,7 @@
     .red-center.super-table tfoot tr td:nth-child(2){border-radius:0 0 4px 4px!important}
     .red-center.super-table tfoot tr td:nth-child(2) .circ-img{border-color:#15a515;}
     .super-table .description{letter-spacing:initial;text-transform:none;font-weight:normal}
-
+.red-center.super-table tr:last-child td:nth-child(2){border-bottom:0}
 .super-table tr td:first-child h3{margin:0}
 
 .body-dark .red-center.super-table tr td:nth-child(2){

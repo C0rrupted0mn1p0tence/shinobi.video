@@ -14,7 +14,7 @@
             },
             {
                 "text":"If you have 2-Factor Authentication enabled you will need to pass a second gate. <code>machineID</code> must be the same as the one used at the first gate.",
-                "code":"$.post('http://xxx.xxx.xxx.xxx/?json=true',{ke: \"2Df5hBE\", id: \"XDf5hB3\", machineID: \"fMUVxYdG1X3hWb7GNkTd\", factorAuthKey: \"123456\"},function(d){<br>     console.log(d.data.$user)<br>})",
+                "code":"$.post('http://xxx.xxx.xxx.xxx/?json=true',{ke: \"2Df5hBE\", id: \"XDf5hB3\", machineID: \"fMUVxYdG1X3hWb7GNkTd\", factorAuthKey: \"123456\"},function(d){<br>     console.log(d.$user)<br>})",
                 "list":[
                     "<b>id : </b> User ID, this can be found after login.",
                     "<b>factorAuthKey : </b> The key you will receive to pass the verification for your account."

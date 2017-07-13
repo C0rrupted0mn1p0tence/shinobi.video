@@ -1,6 +1,6 @@
 <% var Title='Donate'; %>
 <% include blocks/header.ejs %>
-<body class="body-green body-dark">
+<body class="body-green">
     <div class="page-wrapper">
         <!-- ******Header****** -->
         <header id="header" class="header">
@@ -25,6 +25,38 @@
 <p><strong>Bitcoin Address :</strong> 1FvC7M8P9wVT1hXwHj8ugxpZj8JGfGyUDu</p>
 
 <small>PayPal and Bitcoin contributions will not appear in the contribution count.</small>
+        <h2>Can't do a monthly contribution? That's fine! Any amount helps!</h2>
+<script src="https://checkout.stripe.com/checkout.js"></script>
+
+<a id="customButton" class="btn btn-success btn-lg btn-ghost"><i class="fa fa-cc-stripe"></i> Donate $20 CAD</a> <a class="btn btn-success btn-lg btn-ghost" href="https://www.paypal.me/ShinobiCCTV"><i class="fa fa-paypal"></i> Donate by Paypal</a>
+
+<script>
+var handler = StripeCheckout.configure({
+  key: 'pk_test_kzJ1JwNQJIJT2iFy08hjfm4y',
+  image: '/libs/assets/icon/mstile-310x310-circle.png',
+  locale: 'auto',
+  token: function(token) {
+    // You can access the token ID with `token.id`.
+    // Get the token ID to your server-side code for use.
+  }
+});
+
+document.getElementById('customButton').addEventListener('click', function(e) {
+  // Open Checkout with further options:
+  handler.open({
+    name: 'Shinobi Development',
+    description: 'Support the development.',
+    currency: 'cad',
+    amount: 2000
+  });
+  e.preventDefault();
+});
+
+// Close Checkout on page navigation:
+window.addEventListener('popstate', function() {
+  handler.close();
+});
+</script>
 </div>
 <div class="jumbotron">
 <p><b style="font-size:120%">Big</b> Thank You to those already supporting! With you more time and effort can be put into Shinobi! <i class="fa fa-smile-o"></i></p>

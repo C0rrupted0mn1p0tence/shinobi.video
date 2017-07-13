@@ -18,7 +18,7 @@ $('#theme-floater').click(function(){
     localStorage.setItem('theme',e.value)
 })
 e={theme:localStorage.getItem('theme')}
-if(e.theme==='light'){
-    $('body').removeClass('body-dark')
+if(e.theme==='dark'){
+    $('body').addClass('body-dark')
 }
 </script>

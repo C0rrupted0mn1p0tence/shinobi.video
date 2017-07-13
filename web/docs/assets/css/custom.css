@@ -24,7 +24,20 @@ pre {
     border:1px solid #eee;
 }
 .doc-wrapper>.container,.cards-section>.container{
+    background:#fff;
+}
+body{
     background:#ededed;
+}
+.section-block li img{
+    box-shadow: 0 0 10px #eee;margin-top: 20px
+}
+.body-dark .section-block li img{
+    box-shadow: 0 0 10px #333;
+}
+.body-dark .cards-section .item-inner {
+    box-shadow: 0 0 10px #333;
+    background: #f9f9fb;
 }
 .body-dark #header{
     background: #222222;

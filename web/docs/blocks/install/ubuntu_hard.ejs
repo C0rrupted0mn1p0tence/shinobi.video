@@ -39,11 +39,7 @@
 <em>Note :</em> <code>#apt-get install node</code> installs something else, not Node.js.</li>
 </ul>
 
-<pre><code>apt update
-apt install nodejs npm
-sudo npm cache clean -f
-sudo npm install -g n
-sudo n stable
+<pre><code>sudo apt update<br>sudo apt install curl gnupg2 -y<br>curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -<br>sudo apt install nodejs -y<br>sudo apt install npm -y
 </code></pre>
 </li>
 <li>
