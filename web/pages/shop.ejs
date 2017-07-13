@@ -21,7 +21,7 @@ var products=JSON.parse(file_get_contents(__dirname+'/web/data/products.json','u
 %>
     <% include blocks/shop/product.ejs %>
 <% }else{ %>
-    <% include blocks/shop/store.ejs %>
+    <% include blocks/shop/front.ejs %>
 <% } %>
 <% include blocks/getstarted.ejs %>
 <% include blocks/footer.ejs %>

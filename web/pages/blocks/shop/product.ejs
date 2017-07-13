@@ -141,9 +141,22 @@ body:not(.body-dark) .product-info .tab-pane,.product-info .tab-pane.white{
                         <div class="product-price"><span class="currencyType">$</span><span class="amount"><%- product.amount %></span> <span class="currency"><%- product.currency.toUpperCase() %></span></div>
                         <div class="product-stock"><%- product.shipping %><br><small><%- product.shippingTime %></small></div>
                         <hr>
-                        <a class="btn btn-block btn-success buy_now">
-                            Order Now
-                        </a>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <a total_step="-1" class="btn btn-default">&nbsp;<i class="fa fa-minus"></i>&nbsp;</a>
+                                    </div>
+                                    <input id="buy_total" class="form-control text-center" value="1">
+                                    <div class="input-group-btn">
+                                        <a total_step="1" class="btn btn-default">&nbsp;<i class="fa fa-plus"></i>&nbsp;</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <a class="btn btn-sm btn-success btn-block" id="buy_now">Order Now</a>
+                            </div>
+                        </div>
                         <div class="clearfix" style="margin:10px"></div>
                         <div>
                             <% product.images.forEach(function(v,n){
@@ -259,6 +272,28 @@ $(document).ready(function(){
         })
         .resize(productImageResize)
         .resize()
+        
+    $('#buy_total')
+        .change(function(){
+            var total = parseInt($(this).val())
+            $('#buy_now').unbind('click').click(function(){
+                var stripe=<%-JSON.stringify(product.stripe)%>
+                stripe.name=total+' x <%-product.stripe.name%>'
+                stripe.amount=total*<%-product.stripe.amount%>
+                handler.open(stripe);
+            })
+        })
+        .change()
+    $('[total_step]')
+        .click(function(){
+            var total = parseInt($('#buy_total').val())
+            var step = parseInt($(this).attr('total_step'))
+            var newTotal = step+total
+            if(newTotal<1){
+                newTotal=1
+            }
+            $('#buy_total').val(newTotal).change()
+        })
 });
 var productImageResize=function(){
     var ele=$('#item-display')
@@ -266,7 +301,6 @@ var productImageResize=function(){
 }
 $('.flip-card').click(function(){
     var $card = $(this).parents('.card-container');
-    console.log($card);
     if($card.hasClass('hover')){
         $card.removeClass('hover');
     } else {
@@ -276,9 +310,5 @@ $('.flip-card').click(function(){
 //stripe : Close Checkout on page navigation:
 window.addEventListener('popstate', function() {
   handler.close();
-});
-$('.buy_now').click(function(e) {
-  handler.open(<%-JSON.stringify(product.stripe)%>);
-  e.preventDefault();
 });
 </script>

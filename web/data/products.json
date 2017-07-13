@@ -31,7 +31,7 @@
         ],
         "background":"/libs/assets/backgrounds/3.jpg",
         "stripe":{
-            "name":"1 x 1440p HD IP Camera",
+            "name":"1440p HD IP Camera",
             "billingAddress":true
         },
         "specifications":{
@@ -162,7 +162,7 @@
         ],
         "background":"/libs/assets/backgrounds/4.jpg",
         "stripe":{
-            "name":"1 x 720p HD IP Camera",
+            "name":"720p HD IP Camera",
             "billingAddress":true
         },
         "specifications":{
@@ -352,7 +352,7 @@
             "/libs/assets/products/CDA3-20/1.jpg",
             "/libs/assets/products/CDA3-20/2.jpg"
         ],
-        "background":"/libs/assets/backgrounds/2.jpg",
+        "background":"/libs/assets/backgrounds/5.jpg",
         "stripe":{
             "name":"Hitron CDA3-20 Modem",
             "billingAddress":true
@@ -405,7 +405,7 @@
         "images":[
             "/libs/assets/products/SR552n/1.jpg"
         ],
-        "background":"/libs/assets/backgrounds/5.jpg",
+        "background":"/libs/assets/backgrounds/2.jpg",
         "stripe":{
             "name":"SmartRG SR552n Bonded",
             "billingAddress":true

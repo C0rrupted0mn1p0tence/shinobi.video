@@ -52,6 +52,11 @@
             v.stripe.amount=v.amount*100
             %>
 <div class="col-md-4 col-sm-6 section-block">
+    <div class="tags hidden">
+        <% v.tags.forEach(function(b,m){ %>
+        <li><b>tag:<%- b %></b></li>
+        <% }) %>
+    </div>
      <div class="card-container manual-flip">
         <div class="card">
             <div class="front">
@@ -67,7 +72,14 @@
                         <p class="profession"><%- v.shortDescription %></p>
                         <p class="price"><span class="currencyType">$</span><span class="amount"><%- v.amount %></span> <span class="currency"><%- v.currency.toUpperCase() %></span></p>
                         <p><span class="shipping"><%- v.shipping %></span></p>
-                        <p class="text-center"><a class="btn btn-sm btn-primary btn-block" id="buy_<%-v.id%>">Purchase</a></p>
+                        <p class="text-center"><a class="btn btn-sm btn-primary btn-block" id="buy_<%-v.id%>">Purchase</a>
+                            <script>
+                            document.getElementById('buy_<%-v.id%>').addEventListener('click', function(e) {
+                              handler.open(<%-JSON.stringify(v.stripe)%>);
+                              e.preventDefault();
+                            });
+                            </script>
+                        </p>
                     </div>
                     <div class="footer">
                         <button class="btn btn-simple flip-card">
@@ -104,12 +116,6 @@
         </div> <!-- end card -->
     </div> <!-- end card-container -->
 </div> <!-- end col sm 3 -->
-<script>
-document.getElementById('buy_<%-v.id%>').addEventListener('click', function(e) {
-  handler.open(<%-JSON.stringify(v.stripe)%>);
-  e.preventDefault();
-});
-</script>
         <% }) %>
             </div>
             </div>
