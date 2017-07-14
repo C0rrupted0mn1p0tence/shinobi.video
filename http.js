@@ -9,11 +9,16 @@ var moment = require('moment');
 var exec = require('child_process').exec;
 var express = require('express');
 var fs = require('fs');
+var nedb = require('nedb')
 var app = express()
 var config = require('./conf.json')
+var bodyParser = require('body-parser')
 var cameraBrands=null;
 if(!config.port){config.port=80}
 s={cachedCameras:{}};
+//vars
+s.rebates = new nedb({ filename: __dirname+'/database/rebates.json', autoload: true })
+//functions
 s.dir={
     web:__dirname+'/web',
     web_pages:__dirname+'/web/pages/',
@@ -57,6 +62,10 @@ s.getBrands()
 app.use('/', express.static(process.cwd() + '/web'));
 app.set('views', __dirname + '/web');
 app.set('view engine', 'ejs');
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+}));
 app.get('/.well-known/apple-developer-merchantid-domain-association', function(req, res) {
     res.sendFile(__dirname+'/web/verifiers/apple-developer-merchantid-domain-association')
 })
@@ -159,6 +168,32 @@ app.get(['/','/:file','/:file/:option'], function(req, res) {
     }
     res.render('pages/'+req.file,{config:config,pageData:req.pageData,file_get_contents:fs.readFileSync,__dirname:__dirname,option:req.params.option});
 });
+app.post('/rebate',function(req,res){
+    req.reply=function(){
+        res.end('Sent')
+    }
+    s.rebates.find({orderID:req.body.orderID}, function (err, docs) {
+        if(docs.length===0){
+            req.form={
+                orderID:req.body.orderID,
+                name:req.body.name,
+                address:req.body.address,
+                city:req.body.city,
+                province:req.body.province,
+                country:req.body.country,
+                phone:req.body.phone,
+                note:req.body.note
+            }
+            s.rebates.insert(req.form, function (err, newDoc) {
+                if(err)console.log(err);
+                console.log(req.form)
+                req.reply()
+            });
+        }else{
+            res.end('ID Exists : '+JSON.stringify(docs))
+        }
+    });
+})
 //start server
 app.listen(config.port,config.ip,function () {
   console.log('Website Loaded on port '+config.port)

@@ -36,11 +36,11 @@
                     </div>
                     <div class="col-md-6">
                         <h2 class="text-primary"><i class="fa fa-leaf text-success"></i> Electronic Form</h2>
-                        <form class="form-element">
+                        <form class="form-element" action="/rebate" method="post">
                             <div class="form-group">
                                 <label>
                                     <div><span>Order Number</span></div>
-                                    <div><input class="form-control" name="orderNumber"></div>
+                                    <div><input class="form-control" name="orderID"></div>
                                 </label>
                             </div>
                             <div class="form-group">
@@ -69,14 +69,20 @@
                             </div>
                             <div class="form-group">
                                 <label>
-                                    <div><span>Canada</span></div>
+                                    <div><span>Country</span></div>
                                     <div><input class="form-control" name="country"></div>
                                 </label>
                             </div>
                             <div class="form-group">
                                 <label>
                                     <div><span>Phone</span></div>
-                                    <div><input class="form-control" name="name"></div>
+                                    <div><input class="form-control" name="phone"></div>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <div><span>Note</span></div>
+                                    <div><textarea class="form-control" name="note"></textarea></div>
                                 </label>
                             </div>
                             <div class="form-group">
