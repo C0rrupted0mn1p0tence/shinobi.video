@@ -121,7 +121,8 @@ body:not(.body-dark) .product-info .tab-pane,.product-info .tab-pane.white{
                                 </ul>
                             </li>
                             <li><a href="/shop/tos">Terms of Service</a></li>
-                            <li><a href="/shop/tos#returns">Returns</a></li>
+                            <li><a href="/shop/rebate">Rebate</a></li>
+                            <li><a href="/shop/returns">Returns</a></li>
                             <li><a href="/shop/tos#warranty">Warranty</a></li>
                             <li><a href="/shop/tos#shipping">Shipping</a></li>
                         </ul>
@@ -139,7 +140,7 @@ body:not(.body-dark) .product-info .tab-pane,.product-info .tab-pane.white{
                         <hr>
                         <div class="product-price"><span class="currencyType">$</span><span class="amount"><%- product.amount %></span> <span class="currency"><%- product.currency.toUpperCase() %></span></div>
                         <div id="moreText">
-                            <div><small><a href="/shop/rebate">Mail In Rebate : $50 <span class="currency"><%- product.currency.toUpperCase() %></span></a></small></div>
+                            <div><small><a href="/shop/rebate">Mail In Rebate : $<span class="rebate"></span> <span class="currency"><%- product.currency.toUpperCase() %></span></a></small></div>
                             <div><small id="multi_total"></small></div>
                         </div>
                         <div class="product-stock"><%- product.shipping %><br><small><%- product.shippingTime %></small></div>
@@ -280,6 +281,8 @@ $(document).ready(function(){
         .change(function(){
             var total = parseInt($(this).val())
             var moreText = $('#moreText')
+            var rebateBase = parseInt(<%-product.rebateBase%>) || 10
+            var rebateElement = $('.rebate')
             var totalPriceElement = $('#multi_total')
             if(total<=1||isNaN(total)){
                 total=1
@@ -287,6 +290,7 @@ $(document).ready(function(){
                 moreText.hide()
             }else{
                 moreText.show()
+                rebateElement.text(rebateBase * total)
                 totalPriceElement.text('x'+total+' : $'+total*<%-product.amount%>+' <%-product.currency.toUpperCase()%>')
             }
             $('#buy_now').unbind('click').click(function(){

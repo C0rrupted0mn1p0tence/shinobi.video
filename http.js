@@ -8,6 +8,7 @@ var http = require('http');
 var moment = require('moment');
 var exec = require('child_process').exec;
 var express = require('express');
+var nodemailer = require('nodemailer');
 var fs = require('fs');
 var nedb = require('nedb')
 var app = express()
@@ -15,9 +16,15 @@ var config = require('./conf.json')
 var bodyParser = require('body-parser')
 var cameraBrands=null;
 if(!config.port){config.port=80}
-s={cachedCameras:{}};
+if(config.mail){
+    var nodemailer = require('nodemailer').createTransport(config.mail);
+}
+s={cachedCameras:{},s:JSON.stringify};
 //vars
-s.rebates = new nedb({ filename: __dirname+'/database/rebates.json', autoload: true })
+s.database={}
+s.database.contact = new nedb({ filename: __dirname+'/database/contact.json', autoload: true })
+s.database.rebate = new nedb({ filename: __dirname+'/database/rebates.json', autoload: true })
+s.database.returns = new nedb({ filename: __dirname+'/database/returns.json', autoload: true })
 //functions
 s.dir={
     web:__dirname+'/web',
@@ -168,14 +175,35 @@ app.get(['/','/:file','/:file/:option'], function(req, res) {
     }
     res.render('pages/'+req.file,{config:config,pageData:req.pageData,file_get_contents:fs.readFileSync,__dirname:__dirname,option:req.params.option});
 });
-app.post('/rebate',function(req,res){
-    req.reply=function(){
-        res.end('Sent')
+app.post(['/:form','/shop/:form'],function(req,res){
+    res.setHeader('Content-Type','application/json');
+    req.reply=function(reply){
+        res.end(s.s(reply, null, 3));
     }
-    s.rebates.find({orderID:req.body.orderID}, function (err, docs) {
-        if(docs.length===0){
+    if(!s.database[req.params.form]){
+        req.reply({ok:false,msg:'Not a valid form type'})
+        return
+    }
+    Object.keys(req.body).forEach(function(v,n){
+        if(!req.body[v]){return}
+        req.body[v]=req.body[v].trim()
+    })
+    switch(req.params.form){
+        case'contact':
+            req.form={
+                name:req.body.name,
+                mail:req.body.mail,
+                city:req.body.city,
+                province:req.body.province,
+                country:req.body.country,
+                phone:req.body.phone,
+                note:req.body.note
+            }
+        break;
+        default:
             req.form={
                 orderID:req.body.orderID,
+                mail:req.body.mail,
                 name:req.body.name,
                 address:req.body.address,
                 city:req.body.city,
@@ -184,15 +212,75 @@ app.post('/rebate',function(req,res){
                 phone:req.body.phone,
                 note:req.body.note
             }
-            s.rebates.insert(req.form, function (err, newDoc) {
-                if(err)console.log(err);
-                console.log(req.form)
-                req.reply()
+            if(req.form.orderID)req.form.orderID=req.body.orderID.replace(/ /g,'');
+            req.checkValue=req.body.orderID;
+        break;
+    }
+    if(req.body.orderID===''){
+        req.reply({ok:false,msg:'Order ID cannot be empty'})
+        return
+    }
+    if(req.body.name===''){
+        req.reply({ok:false,msg:'Name cannot be empty'})
+        return
+    }
+    if(req.body.mail===''){
+        req.reply({ok:false,msg:'Email cannot be empty'})
+        return
+    }
+    if(req.body.address&&req.body.address===''){
+        req.reply({ok:false,msg:'Address cannot be empty'})
+        return
+    }
+    if(req.body.city&&req.body.city===''){
+        req.reply({ok:false,msg:'City cannot be empty'})
+        return
+    }
+    if(req.body.province&&req.body.province===''){
+        req.reply({ok:false,msg:'Province cannot be empty'})
+        return
+    }
+    if(req.body.country&&req.body.country===''){
+        req.reply({ok:false,msg:'Country cannot be empty'})
+        return
+    }
+    if(req.body.phone&&req.body.phone===''){
+        req.reply({ok:false,msg:'Phone cannot be empty'})
+        return
+    }
+    req.next=function(){
+        if(nodemailer){
+            req.mailOptions = {
+                from: '"ShinobiCCTV" <no-reply@shinobi.video>',
+                to: config.mail.auth.user,
+                subject: '"'+req.params.form+'" Request from '+req.form.name,
+                html: '',
+            };
+            Object.keys(req.form).forEach(function(v,n){
+                req.mailOptions.html+='<div><b>'+v+' :</b> '+req.form[v]+'</div>'
+            })
+            nodemailer.sendMail(req.mailOptions, (error, info) => {
+                if (error) {
+                    console.log(error)
+                }
             });
-        }else{
-            res.end('ID Exists : '+JSON.stringify(docs))
         }
-    });
+        req.reply({ok:true})
+    }
+    if(req.checkValue){
+        s.database[req.params.form].find({orderID:new RegExp(req.checkValue, "g")}, function (err, docs) {
+            if(docs.length===0){
+                s.database[req.params.form].insert(req.form, function (err, newDoc) {
+                    if(err)console.log(err);
+                    req.next()
+                });
+            }else{
+                req.reply({ok:false,msg:'Order ID Exists'})
+            }
+        });
+    }else{
+        req.next()
+    }
 })
 //start server
 app.listen(config.port,config.ip,function () {

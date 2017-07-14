@@ -33,10 +33,12 @@
                             Burnaby, B.C. V5E1C5<br>
                             Canada
                         </blockquote>
+                        <h2 class="text-primary"><i class="fa fa-check text-success"></i> Once you have been accepted</h2>
+                        <p>Your rebate will be applied to the method used for payment. Rebate requests that have been found to be fraudulent will be discarded without notice.</p>
                     </div>
                     <div class="col-md-6">
                         <h2 class="text-primary"><i class="fa fa-leaf text-success"></i> Electronic Form</h2>
-                        <form class="form-element" action="/rebate" method="post">
+                        <form class="form-element" id="rebateForm">
                             <div class="form-group">
                                 <label>
                                     <div><span>Order Number</span></div>
@@ -47,6 +49,12 @@
                                 <label>
                                     <div><span>Name on Order</span></div>
                                     <div><input class="form-control" name="name"></div>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <div><span>Email</span></div>
+                                    <div><input class="form-control" name="mail"></div>
                                 </label>
                             </div>
                             <div class="form-group">
@@ -86,15 +94,9 @@
                                 </label>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-block btn-success">Send</button>
+                                <button type="submit" class="btn btn-block btn-default">Send</button>
                             </div>
                         </form>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="text-primary"><i class="fa fa-leaf text-success"></i> Once you have been accepted</h2>
-                        <p>Your rebate will be applied to the method used for payment. Rebate requests that have been found to be fraudulent will be discarded without notice.</p>
                     </div>
                 </div>
             </div>
@@ -102,3 +104,19 @@
     </div>
 </div>
 </section>
+<script>
+    $('#rebateForm').submit(function(ee){
+        e={e:$(this)}
+        e.submitButton=e.e.find('[type=submit]').removeClass('btn-default btn-success btn-danger')
+        $.post('/shop/rebate',e.e.serialize(),function(d){
+            if(d.ok===true){
+                e.e.find('input,textarea').prop('disabled',true)
+                e.submitButton.text('Sent! We will review your request!').addClass('btn-success')
+                $('#rebateForm').unbind('submit').submit(function(e){return false;e.preventDefault()})
+            }else{
+                e.submitButton.text(d.msg).addClass('btn-danger')
+            }
+        })
+        ee.preventDefault()
+    })
+</script>
