@@ -120,11 +120,10 @@ body:not(.body-dark) .product-info .tab-pane,.product-info .tab-pane.white{
                                     <% }) %>
                                 </ul>
                             </li>
-<!--
-                            <li><a href="/tos">Terms of Service</a></li>
-                            <li><a href="/tos#warranty">Warranty</a></li>
-                            <li><a href="/tos#shipping">Shipping</a></li>
--->
+                            <li><a href="/shop/tos">Terms of Service</a></li>
+                            <li><a href="/shop/tos#returns">Returns</a></li>
+                            <li><a href="/shop/tos#warranty">Warranty</a></li>
+                            <li><a href="/shop/tos#shipping">Shipping</a></li>
                         </ul>
                 </div>
 				<div class="col-md-10">
@@ -139,6 +138,10 @@ body:not(.body-dark) .product-info .tab-pane,.product-info .tab-pane.white{
 <!--                        <div class="product-rating"><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> </div>-->
                         <hr>
                         <div class="product-price"><span class="currencyType">$</span><span class="amount"><%- product.amount %></span> <span class="currency"><%- product.currency.toUpperCase() %></span></div>
+                        <div id="moreText">
+                            <div><small><a href="/shop/rebate">Mail In Rebate : $50 <span class="currency"><%- product.currency.toUpperCase() %></span></a></small></div>
+                            <div><small id="multi_total"></small></div>
+                        </div>
                         <div class="product-stock"><%- product.shipping %><br><small><%- product.shippingTime %></small></div>
                         <hr>
                         <div class="row">
@@ -276,6 +279,16 @@ $(document).ready(function(){
     $('#buy_total')
         .change(function(){
             var total = parseInt($(this).val())
+            var moreText = $('#moreText')
+            var totalPriceElement = $('#multi_total')
+            if(total<=1||isNaN(total)){
+                total=1
+                $(this).val(total)
+                moreText.hide()
+            }else{
+                moreText.show()
+                totalPriceElement.text('x'+total+' : $'+total*<%-product.amount%>+' <%-product.currency.toUpperCase()%>')
+            }
             $('#buy_now').unbind('click').click(function(){
                 var stripe=<%-JSON.stringify(product.stripe)%>
                 stripe.name=total+' x <%-product.stripe.name%>'
@@ -289,9 +302,6 @@ $(document).ready(function(){
             var total = parseInt($('#buy_total').val())
             var step = parseInt($(this).attr('total_step'))
             var newTotal = step+total
-            if(newTotal<1){
-                newTotal=1
-            }
             $('#buy_total').val(newTotal).change()
         })
 });

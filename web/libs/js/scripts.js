@@ -1,4 +1,4 @@
-(function($) {
+
     "use strict";
 
     $('body').scrollspy({
@@ -31,5 +31,3 @@
        $('#galleryImage').attr("src",$(e.relatedTarget).data("src"));
     });
     $('body').on('click','.imgPop',function(e){e.e=$(this);e.p=e.e.parent().find('.title').text();$('body').append('<div class="imgPopped"><img src="'+e.e.attr('src')+'" class="animated fadeIn" title="'+e.p+'"></div>');}).on('click','.imgPopped',function(e){$(this).remove()});
-
-})(jQuery);

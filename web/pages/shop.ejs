@@ -13,15 +13,25 @@ var products=JSON.parse(file_get_contents(__dirname+'/web/data/products.json','u
 });
 </script>
 <% include blocks/header.ejs %>
-<% if(option&&option!==''&&products[option]){ 
-    var product=products[option]
-    product.stripe.description=product.shortDescription
-    product.stripe.currency=product.currency
-    product.stripe.amount=product.amount*100
-%>
-    <% include blocks/shop/product.ejs %>
-<% }else{ %>
-    <% include blocks/shop/front.ejs %>
-<% } %>
+<% switch(option){
+    case'tos':
+    case'rebate':
+    case'returns':
+        %>
+    <%- include('blocks/shop/'+option+'.ejs') %>
+  <%  break;
+    default:
+        if(option&&option!==''&&products[option]){ 
+            var product=products[option]
+            product.stripe.description=product.shortDescription
+            product.stripe.currency=product.currency
+            product.stripe.amount=product.amount*100
+        %>
+            <% include blocks/shop/product.ejs %>
+        <% }else{ %>
+            <% include blocks/shop/front.ejs %>
+        <% }
+    break;
+   } %>
 <% include blocks/getstarted.ejs %>
 <% include blocks/footer.ejs %>
